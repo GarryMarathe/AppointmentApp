@@ -1,0 +1,19 @@
+.star-rating {
+    display: flex; /* Align stars horizontally */
+  }
+  
+  .star-button {
+    padding: 0; /* Remove padding for tighter layout */
+    margin: 0 2px; /* Space between stars */
+    color: yellow; /* Default star color */
+  }
+  
+  .star-icon {
+    font-size: 24px; /* Adjust size of stars */
+    transition: color 0.2s; /* Smooth transition for hover effect */
+  }
+  
+  /* Optional: Change color on hover */
+  .star-button:hover .star-icon {
+    color: #FFD700; /* A brighter yellow on hover */
+  }

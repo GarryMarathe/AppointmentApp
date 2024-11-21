@@ -1,0 +1,15 @@
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 16px; /* Space between rows */
+  }
+  
+  .flex-field {
+    flex: 1 1 20%; /* Allow fields to grow and shrink; base width of 45% */
+    margin-right: 16px; /* Space between fields */
+  }
+  
+  /* Remove margin for the last field in each row */
+  .flex-field:last-child {
+    margin-right: 0; 
+  }

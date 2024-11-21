@@ -1,0 +1,37 @@
+/* Ensure the dialog container is larger */
+.mat-dialog-container {
+    max-width: 500px; /* Adjust to your desired width */
+    width: 100%; /* Make it responsive */
+    padding: 20px; /* Add padding */
+  }
+  
+  /* Title styling */
+  .modal-title {
+    font-size: 1.50rem; /* Larger title font size */
+    margin-bottom: 1rem; /* Space below the title */
+    text-align: center; /* Center the title */
+    padding-top: 1rem;
+  }
+  
+  /* Body styling */
+  .modal-body {
+    padding: 1rem; /* Padding for the body */
+    text-align: center; /* Center-align the text */
+  }
+  
+  /* Footer styling */
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+  }
+  
+  /* Button spacing */
+  .btn {
+    margin-left: 0.5rem; /* Space between buttons */
+  }
+  
+  /* Danger button styling */
+  .btn-danger {
+    background-color: #dc3545; /* Bootstrap danger color */
+    color: white; /* Text color for danger button */
+  }

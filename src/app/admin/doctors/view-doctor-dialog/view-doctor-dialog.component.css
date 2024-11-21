@@ -1,0 +1,62 @@
+.dialog-title {
+    text-align: center;
+    font-size: 24px; /* Larger font size for the title */
+    margin-top: 20px; /* Remove default margin */
+  }
+  
+  .doctor-details {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  .avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #673ab7; /* Default avatar background color */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .detail-item {
+    display: flex;
+    width: 100%; /* Take full width */
+    margin-bottom: 10px; /* Space between items */
+    padding-left: 100px;
+    
+  }
+  
+  .detail-value {
+    padding-left: 10px;
+    font-size: 16px; /* Font size for values */
+    color: #333; /* Darker color for better readability */
+  }
+  
+  .rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.5rem; /* Adjust size of stars */
+  }
+  
+  .rating-stars .mat-icon.selected {
+    color: #ff9800; /* Color for filled stars */
+  }
+  
+  .rating-stars .mat-icon {
+    color: #ccc; /* Color for empty stars */
+    cursor: default; /* Prevent cursor change */
+  }

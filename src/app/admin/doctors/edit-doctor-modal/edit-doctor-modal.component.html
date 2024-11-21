@@ -1,0 +1,101 @@
+<h2 mat-dialog-title style="text-align: center;">Edit Doctor</h2>
+<form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <div class="form-row">
+      <mat-form-field appearance ="fill" class="flex-field">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>Email</mat-label> <!-- New email field -->
+        <input matInput formControlName="email" required>
+        <mat-error *ngIf="doctorForm.get('email')?.hasError('required')">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="doctorForm.get('email')?.hasError('email')">
+          Please enter a valid email address.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>Specialization</mat-label>
+        <mat-select formControlName="specializationId" required>
+          <mat-option *ngFor="let specialty of data.specialties" [value]="specialty.id">
+            {{ specialty.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>Contact Number</mat-label>
+        <input matInput formControlName="contactNumber" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>License Number</mat-label>
+        <input matInput formControlName="licenseNumber" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>Experience (Years)</mat-label>
+        <input matInput type="number" formControlName="experience" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>Degree</mat-label>
+        <input matInput formControlName="degree" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>Consultancy Fees</mat-label>
+        <input matInput type="number" formControlName="fees" required>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="flex-field" style="width: 100%;">
+        <mat-label>Availability Days</mat-label>
+        <mat-select formControlName="availableDays" multiple>
+          <mat-option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="flex-field">
+        <mat-label>Time Slot</mat-label>
+        <input matInput formControlName="timeSlot" placeholder="e.g. 09:00 - 17:00" required>
+        <mat-error *ngIf="doctorForm.get('timeSlot')?.hasError('required')">
+          Time slot is required.
+        </mat-error>
+        <mat-error *ngIf="doctorForm.get('timeSlot')?.hasError('pattern')">
+          Time slot must be in the format HH:MM - HH:MM.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill" class="flex-field" style="width: 100%;">
+        <mat-label>About Doctor</mat-label>
+        <textarea matInput formControlName="aboutDoctor" required></textarea>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">Update Doctor</button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,47 @@
+:host{
+    display: block;
+    background-color: #e2e2e2;
+    overflow-y: hidden;
+  }
+  body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 20vh;
+}
+
+.card-body {
+    display: flex;
+    align-items: center;
+}
+
+.icon-container {
+    flex: 0 0 auto; /* Prevent icon from stretching */
+    margin-right: 15px; /* Spacing between icon and text */
+}
+
+.icon-container i {
+    font-size: 2rem; /* Adjust icon size */
+}
+
+.text-container {
+    flex: 1; /* Allow text to take remaining space */
+}
+
+.progress {
+    height: 5px;
+    border-radius: 5px;
+    margin-top: 10px; /* Space between text and progress bar */
+}
+
+.progress-bar {
+    border-radius: 5px;
+}
+
+.text-muted {
+    font-size: 0.9rem;
+}

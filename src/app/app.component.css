@@ -1,0 +1,30 @@
+/* Main layout styling */
+
+.dashboard-layout {
+    display: flex; /* Flexbox for layout */
+    transition: margin-left 0.3s ease; /* Smooth transition for sidebar */
+    overflow-y: hidden;
+}
+
+app-dashboard-sidebar {
+    /* Ensure sidebar takes its width */
+    transition: width 0.3s ease; /* Smooth transition for sidebar */
+}
+
+/* Content area styles */
+.content-area {
+    flex-grow: 1; /* Allow content area to fill the remaining space */
+    padding: 0px; /* Padding for content area */
+    background-color: #e2e2e2; /* Light background for contrast */
+    transition: margin-left 0.3s ease; /* Smooth transition for collapsing */
+    min-height: 100vh; /* Full height for the content area */
+}
+
+/* Collapsed sidebar styling */
+.sidebar-collapsed {
+    margin-left: 0px; /* Adjust margin when sidebar is collapsed */
+}
+
+
+
+

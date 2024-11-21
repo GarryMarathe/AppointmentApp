@@ -1,0 +1,72 @@
+/* Overall background color for the Appointment Component */
+:host {
+  display: block;
+  background-color: #e2e2e2; /* Light grey background for the whole component */
+  padding: 40px; /* Padding around the entire component */
+  border-radius: 3px; /* Optional: Rounded corners for the component */
+}
+
+/* Style for the table container */
+.table {
+  width: 100%;
+  overflow: auto;
+  background-color: #ffffff; /* White background for the table itself */
+  padding: 20px; /* Padding inside the table container */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Collapse borders for a cleaner look */
+}
+
+/* Header cell styles */
+th.mat-header-cell {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #673ab7; /* Change header background color */
+  color: white; /* Change header text color */
+}
+
+/* Cell padding */
+.mat-cell, .mat-header-cell {
+  padding: 8px 16px;
+}
+
+/* Paginator styles */
+.mat-paginator {
+  background-color: #f1f1f1; /* Background color for paginator */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Padding around paginator */
+  margin-top: 20px; /* Space between table and paginator */
+}
+
+/* Avatar container styles */
+.avatar-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Avatar styles */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #673ab7;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Heading styles */
+h2 {
+  padding-left: 30px;
+  padding-top: 30px;
+  font-size: 30px;
+}

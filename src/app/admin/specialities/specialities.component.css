@@ -1,0 +1,93 @@
+/* General Container Styles */
+:host {
+    display: block;
+    background-color: #e2e2e2; /* Light grey background for the whole component */
+    padding: 40px; /* Padding around the entire component */
+    border-radius: 3px; /* Optional: Rounded corners for the component */
+}
+
+.container{
+    width: 100%;
+    overflow: auto;
+    background-color: #ffffff; /* White background for the table itself */
+    padding: 20px; /* Padding inside the table container */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Heading Styles */
+h2 {
+    margin-bottom: 20px;
+    color: #343a40; /* Dark gray for the heading */
+    font-size: 30px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0; /* Remove bottom margin to connect with paginator */
+    border-radius: 0.5rem; /* Rounded corners for the table */
+    overflow: hidden; /* Ensure child elements respect border radius */
+}
+
+/* Table Header and Cell Styles */
+th, td {
+    padding: 10px; /* Add some padding to the cells */
+}
+
+th {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: black; /* Black text for header */
+    font-weight: bold;
+}
+
+td {
+    border-bottom: 1px solid #dee2e6; /* Light gray border below each row */
+}
+
+/* Row Hover Effect */
+tr:hover {
+    background-color: #dddddd; /* Light gray on row hover */
+}
+
+/* Specialty Name Hover Effect */
+.specialty-name:hover {
+    color: #00d0f1; /* Change color on hover */
+    cursor: pointer;
+}
+
+/* Button Styles */
+button {
+    margin-right: 10px; /* Spacing between buttons */
+}
+
+/* Reduce Button Size */
+.btn {
+    font-size: 0.8rem; /* Smaller font size */
+    padding: 5px 10px; /* Reduced padding */
+}
+
+/* Icon Styles */
+.bi {
+    margin-right: 5px; /* Space between icon and text */
+}
+
+.mat-paginator {
+    background-color: #f1f1f1; /* Background color for paginator */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding around paginator */
+    margin-top: 20px; /* Space between table and paginator */
+  }
+  
+  .search-bar {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .search-field {
+    width: 50%;
+    display: inline-block;
+    margin-right: 10px;
+  }
+  

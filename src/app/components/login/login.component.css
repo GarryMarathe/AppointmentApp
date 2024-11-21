@@ -1,0 +1,23 @@
+/* Reset default margin and height */
+html, body {
+    height: 100%; /* Ensure full height */
+    margin: 0; /* Remove default margin */
+}
+
+/* Full height container */
+.container-fluid {
+    height: 100vh; /* Full viewport height */
+}
+
+/* Card styling */
+.card {
+    padding: 20px; /* Padding inside the card */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 30vw; /* Width of the card */
+}
+
+/* Ensure mat-form-field takes full width */
+.mat-form-field {
+    width: 100%; /* Full width for material form fields */
+}

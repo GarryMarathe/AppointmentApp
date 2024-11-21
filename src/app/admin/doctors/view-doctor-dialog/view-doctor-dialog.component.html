@@ -1,0 +1,70 @@
+<h2 mat-dialog-title class="dialog-title">Doctor Details</h2>
+<mat-dialog-content class="doctor-details">
+  <div class="avatar-container">
+    <div *ngIf="data.doctor.profileImage; else defaultAvatar">
+      <img [src]="data.doctor.profileImage" alt="Profile Picture" class="avatar" />
+    </div>
+    <ng-template #defaultAvatar>
+      <div class="avatar">
+        <span>{{ data.doctor.doctorName.charAt(0) }}</span>
+      </div>
+    </ng-template>
+  </div>
+  
+  <div class="detail-item">
+    <strong>Name:</strong>
+    <div class="detail-value">{{ data.doctor.doctorName }}</div>
+  </div>
+  <div class="detail-item">
+    <strong>Specialization:</strong>
+    <div class="detail-value">{{ getSpecializationName(data.doctor.specializationId) }}</div>
+  </div>
+  <div class="detail-item">
+    <strong>Contact Number:</strong>
+    <div class="detail-value">{{ data.doctor.contactNumber }}</div>
+  </div>
+  <div class="detail-item">
+    <strong>Fees:</strong>
+    <div class="detail-value">{{ data.doctor.fees | currency:'INR':'symbol' }}</div>
+  </div>
+  <div class="detail-item">
+    <strong>Experience:</strong>
+    <div class="detail-value">{{ data.doctor.experience }} years</div>
+  </div>
+  <div class="detail-item">
+    <strong>Reviews:</strong>
+    <div class="detail-value">{{ data.doctor.reviews }}</div>
+  </div>
+  <div class="detail-item">
+    <strong>Earnings:</strong>
+    <div class="detail-value">{{ data.doctor.earnings | currency:'INR':'symbol' }}</div>
+  </div>
+  
+  <div class="detail-item">
+    <strong>About Doctor:</strong>
+    <div class="detail-value">{{ data.doctor.aboutDoctor }}</div>
+  </div>
+
+  <div class="detail-item">
+    <strong>Availability Days:</strong>
+    <div class="detail-value">{{ data.doctor.availableDays?.join(', ') || 'Not specified' }}</div>
+  </div>
+
+  <div class="detail-item">
+    <strong>Time Slot:</strong>
+    <div class="detail-value">{{ data.doctor.timeSlot || 'Not specified' }}</div>
+  </div>
+
+  <div class="detail-item">
+    <strong>Rating:</strong>
+    <div class="rating-stars">
+      <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" 
+                [ngClass]="{'selected': star <= data.doctor.rating}">
+        {{ star <= data.doctor.rating ? 'star' : 'star_border' }}
+      </mat-icon>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</mat-dialog-actions>

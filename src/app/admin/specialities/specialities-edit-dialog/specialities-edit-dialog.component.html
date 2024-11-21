@@ -1,0 +1,14 @@
+<div class="modal-container">
+  <h2 class="modal-title">Edit Speciality</h2>
+  <mat-dialog-content class="modal-body">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" class="form-control" matInput [(ngModel)]="localName">
+      <div *ngIf="isNameInvalid" class="text-danger">Speciality name cannot be empty.</div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions class="modal-footer">
+    <button mat-button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    <button mat-button class="btn btn-primary" (click)="onSave()" [disabled]="isNameInvalid">Save</button>
+  </mat-dialog-actions>
+</div>

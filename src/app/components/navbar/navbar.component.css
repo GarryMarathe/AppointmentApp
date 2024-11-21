@@ -1,0 +1,82 @@
+/* Navbar styling */
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: white; /* Background color for the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 1;
+    padding: 5px 20px; /* Padding for the navbar */
+}
+
+/* Spacer for flex layout */
+.spacer {
+    flex: 1 1 auto;
+}
+
+/* User Menu styling */
+.user-menu {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 99; /* Ensure it is above the navbar */
+}
+
+/* User Image and Avatar */
+.avatar-icon {
+    font-size: 30px; /* Size for the avatar icon */
+    color: black; /* Icon color */
+}
+
+/* User Header */
+.user-header {
+    display: flex;
+    align-items: center;
+    padding: 10px; /* Padding for the user header */
+}
+
+/* User Text */
+.user-header h6 {
+    font-size: 20px;
+    margin: 0; /* Remove margin for the heading */
+}
+
+.user-header p {
+    margin: 0; /* Remove margin for the paragraph */
+    font-size: 14px; /* Adjust font size */
+    color: #6c757d; 
+}
+
+/* Menu Item styling */
+.mat-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; /* Padding for menu items */
+}
+
+.mat-menu-item:hover {
+    background: #00d0f1; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+
+/* Additional styles to ensure good spacing and alignment */
+.mat-menu {
+    min-width: 200px; /* Minimum width for the dropdown menu */
+    padding: 0; /* Remove padding */
+}
+
+/* Icon styling */
+.mat-icon {
+    margin-right: 0; /* Space between icon and text */
+}
+
+/* Adjust body margin to account for fixed navbar height */
+body {
+    margin-top: 60px; /* Adjust based on the height of the navbar */
+}
+
+.welcome-message {
+    font-weight: bold; /* Make the welcome message bold */
+    font-size: 18px; /* Adjust font size */
+    color: black; /* Color for the welcome message */
+    margin: 0 20px; /* Add margin for spacing */
+}

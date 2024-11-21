@@ -1,0 +1,20 @@
+<div class="modal fade show" tabindex="-1" role="dialog" aria-labelledby="addSpecialtyModalLabel" aria-hidden="true" style="display: block;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="addSpecialtyModalLabel">Add Speciality</h2>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="specialtyName">Speciality Name</label>
+                    <input type="text" class="form-control" id="specialtyName" [(ngModel)]="specialty.name" required />
+                    <div *ngIf="isNameEmpty" class="text-danger">Speciality name cannot be empty.</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onNoClick()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="onAddClick()" [disabled]="isNameEmpty" cdkFocusInitial>Add</button>
+            </div>
+        </div>
+    </div>
+</div>

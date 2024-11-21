@@ -1,0 +1,26 @@
+<mat-toolbar class="navbar">
+    <button mat-icon-button (click)="toggleSidebar.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="spacer"></span> <!-- Spacer to push the content to the right -->
+    
+    <span class="welcome-message">{{ welcomeMessage }}</span> <!-- Display welcome message -->
+
+    <div class="user-menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User  Menu">
+            <i class="bi bi-person-circle avatar-icon"></i>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <div class="user-header">
+                <i class="bi bi-person-circle avatar-icon"></i>
+                <div class="user-text">
+                    <h6>{{ username }}</h6> <!-- Display the username -->
+                    <p class="text-muted mb-0">{{ role }}</p> <!-- Display the role -->
+                </div>
+            </div>
+            <button mat-menu-item (click)="logout()">Logout</button> <!-- Bind logout method -->
+        </mat-menu>
+    </div>
+</mat-toolbar>
