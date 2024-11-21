@@ -320,7 +320,7 @@ export class DoctorsComponent implements OnInit, AfterViewInit {
   
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          // Update the doctor data in the data source
+          // Update the doctor data in the data sourcee
           const index = this.dataSource.data.findIndex(d => d.doctorId === doctorId);
           if (index !== -1) {
             this.dataSource.data[index] = {
