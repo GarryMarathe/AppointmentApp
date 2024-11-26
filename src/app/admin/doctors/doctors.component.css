@@ -1,162 +1,180 @@
-  :host {
-    display: block;
-    background-color: #f9f9f9;
-    padding: 40px;
-    border-radius: 5px;
-  }
+/* Styling for the table and its container */
+.mat-elevation-z8 {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
 
-  .table {
-    width: 100%;
-    overflow: auto;
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
+/* Table Header Styles */
+.mat-header-cell {
+  font-weight: bold;
+  color: white;
+  background-color: #673ab7;
+  padding: 16px !important;
+  text-align: left;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
 
-  /* table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-  } */
+/* Table Cell Styles */
+.mat-cell {
+  padding: 16px !important;
+  text-align: left;
+  vertical-align: middle;
+}
 
-  /* Header Styles */
-  th.mat-header-cell {
-    font-weight: bold;
-    color: white;
-    background-color: #673ab7;
-    padding: 16px !important;
-    text-align: left;
-    white-space: nowrap;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-  }
+/* Specific column width adjustments */
+.mat-column-doctorId {
+  width: 100px;
+  padding-left: 30px !important;
+}
 
-  /* Cell Styles */
-  .mat-cell {
-    padding: 16px !important;
-    text-align: left;
-    vertical-align: middle;
-  }
+.mat-column-doctorName {
+  width: 250px;
+}
 
-  /* Column-specific alignments */
-  [matColumnDef="doctorId"] .mat-cell,
-  [matColumnDef="doctorId"] .mat-header-cell {
-    width: 100px;
-    padding-left: 30px !important;
-  }
+.mat-column-specialization {
+  width: 150px;
+}
 
-  [matColumnDef="doctorName"] .mat-cell,
-  [matColumnDef="doctorName"] .mat-header-cell {
-    width: 250px;
-  }
+.mat-column-contactNumber {
+  width: 150px;
+}
 
-  [matColumnDef="specialization"] .mat-cell,
-  [matColumnDef="specialization"] .mat-header-cell {
-    width: 150px;
-  }
+.mat-column-fees {
+  width: 120px;
+}
 
-  [matColumnDef="contactNumber"] .mat-cell,
-  [matColumnDef="contactNumber"] .mat-header-cell {
-    width: 150px;
-  }
+.mat-column-experience {
+  width: 150px;
+  text-align: center;
+}
 
-  [matColumnDef="fees"] .mat-cell,
-  [matColumnDef="fees"] .mat-header-cell {
-    width: 120px;
-  }
+.mat-column-reviews {
+  width: 180px;
+}
 
-  [matColumnDef="experience"] .mat-cell,
-  [matColumnDef="experience"] .mat-header-cell {
-    width: 150px;
-    text-align: center;
-  }
+.mat-column-earnings {
+  width: 130px;
+  text-align: right;
+}
 
-  [matColumnDef="reviews"] .mat-cell,
-  [matColumnDef="reviews"] .mat-header-cell {
-    width: 180px;
-  }
+.mat-column-actions {
+  width: 180px; /* Width of action column */
+  text-align: center;
+}
 
-  [matColumnDef="earnings"] .mat-cell,
-  [matColumnDef="earnings"] .mat-header-cell {
-    width: 130px;
-    text-align: right;
-  }
+/* Row Hover Effects */
+.mat-row:hover {
+  background-color: rgba(103, 58, 183, 0.04);
+}
 
-  [matColumnDef="accountStatus"] .mat-cell,
-  [matColumnDef="accountStatus"] .mat-header-cell {
-    width: 130px;
-  }
+/* Action Icons Layout */
+.actions-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between icons */
+  align-items: center;
+}
 
-  .avatar-container {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+/* Action Icons Styling */
+.actions-icon {
+  /* color: #673ab7; */
+  font-size: 1.5rem;
+  margin: 0 10px; /* Adjust spacing between icons */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
 
-  .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: #673ab7;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 500;
-    flex-shrink: 0;
-  }
+/* Optional: Add a hover effect on the action icons themselves */
+.actions-container mat-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
 
-  h2 {
-    padding-left: 30px;
-    padding-top: 30px;
-    font-size: 30px;
-  }
+.actions-container mat-icon:hover {
+  transform: scale(1.1); /* Slight zoom effect when hovering over the icon */
+}
 
-  .rating-stars {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .rating-stars {
-    font-size: 1.5rem; /* Adjust size of stars */
-  }
+/* Pagination Styles */
+.mat-paginator {
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 20px;
+}
 
-  .rating-stars .mat-icon.selected {
-    color: #ff9800; /* Color for filled stars */
-  }
+/* Rating Stars */
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
-  .rating-stars .mat-icon {
-    color: #ccc; /* Color for empty stars */
-    cursor: default; /* Prevent cursor change */
-  }
-  .mat-paginator {
-    background-color: #f1f1f1;
-    border-radius: 8px;
-    padding: 10px;
-    margin-top: 20px;
-  }
+.rating-stars .mat-icon {
+  font-size: 20px;
+  color: #ff9800;
+  cursor: default;
+}
 
-  .mat-icon-button {
-    color: #673ab7; /* Change color as needed */
-  }
+.rating-stars .mat-icon.selected {
+  color: #ff9800;
+}
 
-  .mat-icon-button:hover {
-    color: #ff9800; /* Change hover color as needed */
-  }
+/* Hover Effect for Rows */
+.mat-row:hover {
+  background-color: rgba(103, 58, 183, 0.04);
+}
 
-  .actions-icon {
-    font-size: 1.5rem; /* Adjust size as needed */
-    margin-right: 10px; /* Space between icons */
-    transition: color 0.3s ease;
-    cursor: pointer;
-  }
 
-  .actions-icon:hover {
-    color: #ff9800; /* Change color on hover */
-    cursor: pointer;
-  }
+/* Button Styles */
+.mat-raised-button {
+  height: 45px;
+  font-size: 16px;
+  padding: 0 24px;
+}
 
-  
+/* Table Layout */
+.table-container {
+  position: relative;
+  min-height: 200px;
+  overflow: auto;
+}
+
+/* No Data Row */
+.no-data-row {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Styling for the avatar container */
+.avatar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Makes the image circular */
+  object-fit: cover; /* Ensures the image covers the circle without distortion */
+  cursor: pointer; /* Shows a pointer cursor when hovered */
+}
+
+/* Default avatar styling */
+.avatar {
+  background-color: #ccc; /* Default background for avatar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+}

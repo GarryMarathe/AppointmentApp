@@ -13,3 +13,21 @@
   .flex-field:last-child {
     margin-right: 0; 
   }
+
+  /* Full-screen overlay with a loader */
+.full-screen-overlay {
+  position: fixed;  /* Fixed position relative to the viewport */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);  /* Semi-transparent dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it's on top of all other elements */
+}
+
+mat-spinner {
+  display: block;
+}

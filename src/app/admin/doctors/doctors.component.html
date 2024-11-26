@@ -1,102 +1,104 @@
 <h2>View All Doctors</h2>
-<div class="d-flex justify-content-end mb-3">
-  <button mat-raised-button color="primary" (click)="openAddDoctorModal()" style="margin: 10px;">
+
+<!-- Add Doctor Button -->
+<div class="d-flex justify-content-between mb-3">
+  <button mat-raised-button color="primary" (click)="openAddDoctorModal()">
     Add Doctor
   </button>
 </div>
-<div class="table">
-   <table mat-table [dataSource]="dataSource" matSort>
+
+<!-- Table Container -->
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
     <!-- Doctor ID Column -->
     <ng-container matColumnDef="doctorId">
-      <th mat-header-cell *matHeaderCellDef>Doctor ID</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
       <td mat-cell *matCellDef="let element">{{ element.doctorId }}</td>
     </ng-container>
 
-<!-- Doctor Name Column -->
-<ng-container matColumnDef="doctorName">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header>Doctor Name</th>
-  <td mat-cell *matCellDef="let element">
-    <div class="avatar-container">
-      <ng-container *ngIf="element.profileImage; else defaultAvatar">
-        <img [src]="element.profileImage" class="avatar" alt="Profile Picture" />
-      </ng-container>
-      <ng-template #defaultAvatar>
-        <div class="avatar">{{ element.doctorName.charAt(0) }}</div>
-      </ng-template>
-      <span>{{ element.doctorName }}</span>
-    </div>
-  </td>
-</ng-container>
+    <!-- Doctor Name Column -->
+    <ng-container matColumnDef="doctorName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Doctor Name </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="avatar-container">
+          <ng-container *ngIf="element.profileImg; else defaultAvatar">
+            <img [src]="element.profileImg.url" class="avatar" alt="Profile Picture" />
+          </ng-container>
+          <ng-template #defaultAvatar>
+            <div class="avatar">{{ element.firstName }} {{ element.lastName }}</div>
+          </ng-template>
+          <span>{{ element.firstName}} {{ element.lastName }}</span>
+        </div>
+      </td>
+    </ng-container>
 
     <!-- Specialization Column -->
     <ng-container matColumnDef="specialization">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Specialization</th>
-      <td mat-cell *matCellDef="let element">{{ getSpecializationName(element.specializationId) }}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Specialization </th>
+      <td mat-cell *matCellDef="let element">{{ element.speciality }}</td>  <!-- Display speciality directly -->
     </ng-container>
 
     <!-- Contact Number Column -->
     <ng-container matColumnDef="contactNumber">
-      <th mat-header-cell *matHeaderCellDef >Contact Number</th>
+      <th mat-header-cell *matHeaderCellDef> Contact Number </th>
       <td mat-cell *matCellDef="let element">{{ element.contactNumber }}</td>
     </ng-container>
 
     <!-- Fees Column -->
     <ng-container matColumnDef="fees">
-      <th mat-header-cell *matHeaderCellDef >Fees</th>
-      <td mat-cell *matCellDef="let element">{{ element.fees | currency:'INR':'symbol' }}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fees </th>
+      <td mat-cell *matCellDef="let element">{{ element.consultancyFees | currency:'INR':'symbol' }}</td>
     </ng-container>
 
     <!-- Experience Column -->
     <ng-container matColumnDef="experience">
-      <th mat-header-cell *matHeaderCellDef>Experience (Years)</th>
-      <td mat-cell *matCellDef="let element" class="text-center">{{ element.experience }}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Experience </th>
+      <td mat-cell *matCellDef="let element" class="text-center">{{ element.yearsOfExperience }} years</td>
     </ng-container>
 
-    
-<ng-container matColumnDef="reviews">
-  <th mat-header-cell *matHeaderCellDef mat-sort-header>Reviews</th>
-  <td mat-cell *matCellDef="let element">
-    <div class="rating-stars">
-      <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" 
-                [ngClass]="{'selected': star <= element.rating}">
-        {{ star <= element.rating ? 'star' : 'star_border' }}
-      </mat-icon>
-    </div>
-  </td>
-</ng-container>
+    <!-- Reviews Column -->
+    <ng-container matColumnDef="reviews">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Reviews </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="rating-stars">
+          <mat-icon *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{'selected': star <= element.rating}">
+            {{ star <= element.averageRating ? 'star' : 'star_border' }} </mat-icon>
+        </div>
+      </td>
+    </ng-container>
 
     <!-- Earnings Column -->
     <ng-container matColumnDef="earnings">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Earnings</th>
-      <td mat-cell *matCellDef="let element" class="text-right">{{ element.earnings | currency:'INR':'symbol' }}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Earnings </th>
+      <td mat-cell *matCellDef="let element" class="text-right">
+        {{ element.earnings | currency:'INR':'symbol' }}
+      </td>
     </ng-container>
-<!-- Actions Column -->
-<ng-container matColumnDef="actions">
-  <th mat-header-cell *matHeaderCellDef>Actions</th>
-  <td mat-cell *matCellDef="let element">
-    <a (click)="viewDoctor(element.doctorId)" class="text-primary actions-icon" title="View">
-      <mat-icon>visibility</mat-icon>
-    </a>
-    <a (click)="editDoctor(element.doctorId)" class="text-secondary actions-icon" title="Edit">
-      <mat-icon>edit</mat-icon>
-    </a>
-    <a (click)="deleteDoctor(element.doctorId)" class="text-danger actions-icon" title="Delete">
-      <mat-icon>delete</mat-icon>
-    </a>
-  </td>
-</ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="actions-container">
+          <button mat-icon-button color="primary" (click)="viewDoctor(element._id)" matTooltip="View">
+            <mat-icon class="actions-icon">visibility</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="editDoctor(element.doctorId)" matTooltip="Edit">
+            <mat-icon class="actions-icon">edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteDoctor(element._id)" matTooltip="Delete">
+            <mat-icon class="actions-icon">delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
   </table>
 
-
- 
-
-  <mat-paginator 
-    [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-    [length]="dataSource.data.length"
-    aria-label="Select page">
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of doctors">
   </mat-paginator>
 </div>

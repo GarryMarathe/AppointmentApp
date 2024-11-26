@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Specialty } from '../../specialities/specialities.component';
+
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,7 +10,8 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Doctor } from '../doctors.component';
+import { Doctor, Specialty } from '../../../model';
+
 
 @Component({
   selector: 'app-edit-doctor-modal',
@@ -44,15 +45,15 @@ export class EditDoctorModalComponent {
       firstName: [data.doctor.doctorName.split(' ')[0], Validators.required],
       lastName: [data.doctor.doctorName.split(' ')[1], Validators.required],
       email: [data.doctor.email, [Validators.required, Validators.email]], 
-      specializationId: [data.doctor.specializationId, Validators.required],
+      // specializationId: [data.doctor.specializationId, Validators.required],
       contactNumber: [data.doctor.contactNumber, [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       licenseNumber: [data.doctor.licenseNumber, Validators.required],
-      experience: [data.doctor.experience, [Validators.required, Validators.min(0)]],
+      experience: [data.doctor.yearsOfExperience, [Validators.required, Validators.min(0)]],
       degree: [data.doctor.degree, Validators.required],
-      fees: [data.doctor.fees, [Validators.required, Validators.min(0)]],
+      fees: [data.doctor.consultancyFees, [Validators.required, Validators.min(0)]],
       availableDays: [[], Validators.required], // New availableDays field
       timeSlot: ['', [Validators.required, Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9] - ([01]?[0-9]|2[0-3]):[0-5][0-9]$')]], // New timeSlot field
-      aboutDoctor: [data.doctor.aboutDoctor, Validators.required],
+      aboutDoctor: [data.doctor.about, Validators.required],
     });
   }
 

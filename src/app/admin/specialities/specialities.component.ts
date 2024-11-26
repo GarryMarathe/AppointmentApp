@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatSort, MatSortModule, Sort } from '@angular/material/sort'; // Import Sort here
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { SpecialtiesDeleteConfirmationDialogComponent } from './specialties-delete-confirmation-dialog/specialties-delete-confirmation-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,11 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { SpecialtiesAddDialogComponent } from './specialties-add-dialog/specialties-add-dialog.component';
-
-export interface Specialty {
-  id: string;
-  name: string;
-}
+import { SpecialtyService } from '../../services/speciality/specialty.service';
+import { Specialty } from '../../model';
 
 @Component({
   selector: 'app-specialities',
@@ -36,104 +33,171 @@ export interface Specialty {
 export class SpecialtiesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'actions'];
   dataSource = new MatTableDataSource<Specialty>([]);
-  currentPage = 0;
-  pageSize = 5;
-
-  private static specialties: Specialty[] = [
-    { id: '1', name: 'Cardiology' },
-    { id: '2', name: 'Neurology' },
-    { id: '3', name: 'Pediatrics' },
-    { id: '4', name: 'Orthopedic' },
-    { id: '5', name: 'Gynecology' },
-    { id: '6', name: 'Urology' },
-    { id: '7', name: 'Dentist' },
-  ];
+  pageSize = 5; // Define the pageSize property
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  loading: boolean | undefined;
+  snackBar: any;
 
-  constructor(private dialog: MatDialog) {}
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-
-    if (this.paginator) {
-      this.paginator.pageSize = this.pageSize;
-    }
-  }
+  constructor(private dialog: MatDialog, private specialtyService: SpecialtyService) {}
 
   ngOnInit(): void {
     this.loadSpecialties();
   }
 
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort; // Bind MatSort to the dataSource
+  }
+
+  // loadSpecialties() {
+  //   this.specialtyService.getAllSpecialties().subscribe(
+  //     (data) => {
+  //       this.dataSource.data = data.specialities;
+  //       // console.log(data)
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching specialties:', error);
+  //     }
+  //   );
+  // }
   loadSpecialties() {
-    this.dataSource.data = SpecialtiesComponent.specialties;
-  }
-
-  // Custom sorting function
-  customSort(data: Specialty[], sort: Sort) {
-    const direction = sort.direction === 'asc' ? 1 : -1;
-    return data.sort((a, b) => {
-      return a.name.localeCompare(b.name) * direction;
-    });
-  }
-
-  openEditDialog(specialty: Specialty) {
-    const dialogRef = this.dialog.open(SpecialtiesEditDialogComponent, {
-      data: specialty,
-    });
-
-    dialogRef.afterClosed().subscribe((result: Specialty) => {
-      if (result) {
-        const index = this.dataSource.data.findIndex((s) => s.id === specialty.id);
-        if (index !== -1) {
-          this.dataSource.data[index] = result;
-          this.dataSource._updateChangeSubscription();
+    this.loading = true;
+    this.specialtyService.getAllSpecialties().subscribe({
+        next: (data) => {
+            console.log('Loaded specialties:', data);
+            this.dataSource.data = data.specialities;
+        },
+        error: (error) => {
+            console.error('Error fetching specialties:', error);
+            this.snackBar.open('Error loading specialties', 'Close', {
+                duration: 3000,
+            });
+        },
+        complete: () => {
+            this.loading = false;
         }
-      }
     });
-  }
+}
+
+openEditDialog(specialty: Specialty) {
+  console.log('Opening edit dialog for specialty:', specialty); // Debug log
+  
+  const dialogRef = this.dialog.open(SpecialtiesEditDialogComponent, {
+    width: '400px',
+    data: specialty,
+    disableClose: true
+  });
+
+  dialogRef.afterClosed().subscribe((result: Specialty) => {
+    console.log('Dialog result:', result); // Debug log
+    if (result) {
+      this.loadSpecialties(); // Reload the list after successful update
+    }
+  });
+}
+
+  // openEditDialog(specialty: Specialty) {
+  //   const dialogRef = this.dialog.open(SpecialtiesEditDialogComponent, {
+  //     data: specialty,
+  //   });
+
+  //   dialogRef.afterClosed().subscribe((result: Specialty) => {
+  //     if (result) {
+  //       this.updateSpecialty(result);
+  //     }
+  //   });
+  // }
+
+  // updateSpecialty(specialty: Specialty) {
+  //   this.specialtyService.updateSpecialty(specialty).subscribe(
+  //     (updatedSpecialty) => {
+  //       this.loadSpecialties(); // Reload specialties after update
+  //     },
+  //     (error) => {
+  //       console.error('Error updating specialty:', error);
+  //     }
+  //   );
+  // }
 
   openDeleteConfirmationDialog(specialty: Specialty) {
     const dialogRef = this.dialog.open(SpecialtiesDeleteConfirmationDialogComponent, {
-      data: specialty,
+        width: '400px',
+        data: specialty,
+        disableClose: true
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        this.dataSource.data = this.dataSource.data.filter((s) => s.id !== specialty.id);
-        this.dataSource.data.forEach((s, index) => {
-          s.id = (index + 1).toString();
-        });
-        this.dataSource._updateChangeSubscription();
-      }
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+            this.loadSpecialties(); // Reload the list after successful deletion
+        }
     });
-  }
+}
+  // openDeleteConfirmationDialog(specialty: Specialty) {
+  //   const dialogRef = this.dialog.open(SpecialtiesDeleteConfirmationDialogComponent, {
+  //     data: specialty,
+  //   });
+
+  //   dialogRef.afterClosed().subscribe((result: any) => {
+  //     if (result) {
+  //       this.deleteSpecialty(specialty._id);
+  //     }
+  //   });
+  // }
+
+  // deleteSpecialty(id: string) {
+  //   this.specialtyService.deleteSpecialty(id).subscribe(
+  //     () => {
+  //       this.loadSpecialties(); // Reload specialties after delete
+  //     },
+  //     (error) => {
+  //       console.error('Error deleting specialty:', error);
+  //     }
+  //   );
+  // }
+
+  // openAddDialog() {
+  //   const dialogRef = this.dialog.open(SpecialtiesAddDialogComponent, {
+  //     width: '250px',
+  //   });
+
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     if (result) {
+  //       this.loadSpecialties();
+  //     }
+  //   });
+  // }
   openAddDialog() {
     const dialogRef = this.dialog.open(SpecialtiesAddDialogComponent, {
-      width: '250px',
+        width: '400px', // Made it a bit wider
+        disableClose: true // Prevent closing by clicking outside
     });
 
-    dialogRef.afterClosed().subscribe((result: Specialty) => {
-      if (result) {
-        result.id = (this.dataSource.data.length + 1).toString(); // Set new ID
-        this.dataSource.data.push(result);
-        this.dataSource._updateChangeSubscription();
-      }
+    dialogRef.afterClosed().subscribe((result) => {
+        console.log('Dialog result:', result);
+        if (result) {
+            this.loadSpecialties(); // Reload the list after successful addition
+        }
     });
-  }
+}
+
+  // addSpecialty(name: string) {
+  //   this.specialtyService.addSpecialty(name).subscribe(
+  //     (data) => {
+  //       console.log(data)
+  //       // this.dataSource.data.push(newSpecialty); // Add the new specialty to the data source
+  //       // this.loadSpecialties();  // Reload specialties after add
+  //       // this.dataSource._updateChangeSubscription(); // Update the data source
+  //     },
+  //     (error) => {
+  //       console.error('Error adding specialty:', error);
+  //     }
+  //   );
+  // }
 
   onPageChange(event: PageEvent) {
-    this.currentPage = event.pageIndex;
-  }
-
-  sortData(sort: Sort) {
-    const data = this.dataSource.data.slice();
-    if (!sort.active || sort.direction === '') {
-      this.dataSource.data = data;
-      return;
-    }
-    this.dataSource.data = this.customSort(data, sort);
+    // Handle page change event if necessary
+    console.log('Page changed:', event);
   }
 }

@@ -7,13 +7,13 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="specialtyName">Speciality Name</label>
-                    <input type="text" class="form-control" id="specialtyName" [(ngModel)]="specialty.name" required />
+                    <input type="text" class="form-control" id="specialtyName" [(ngModel)]="name" required />
                     <div *ngIf="isNameEmpty" class="text-danger">Speciality name cannot be empty.</div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="onNoClick()">Cancel</button>
-                <button type="button" class="btn btn-primary" (click)="onAddClick()" [disabled]="isNameEmpty" cdkFocusInitial>Add</button>
+                <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+                <button type="button" class="btn btn-primary" (click)="onAdd()" [disabled]="isNameEmpty" cdkFocusInitial>Add</button>
             </div>
         </div>
     </div>

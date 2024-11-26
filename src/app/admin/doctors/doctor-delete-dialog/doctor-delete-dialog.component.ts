@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./doctor-delete-dialog.component.css']
 })
 export class DoctorDeleteDialogComponent {
+  doctorsService: any;
   constructor(
     public dialogRef: MatDialogRef<DoctorDeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { id: number; name: string },
@@ -19,11 +20,6 @@ export class DoctorDeleteDialogComponent {
 
   onConfirm(): void {
     this.dialogRef.close(true);
-    this.snackBar.open(`Doctor "${this.data.name}" deleted successfully!`, 'Close', {
-      duration: 3000,
-      verticalPosition: 'top',
-      horizontalPosition: 'center',
-    });
   }
 
   onCancel(): void {
