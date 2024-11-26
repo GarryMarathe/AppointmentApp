@@ -1,11 +1,11 @@
-<h2>View All Doctors</h2>
+<h2 class="heading">View All Doctors</h2>
 
 <!-- Add Doctor Button -->
-<div class="d-flex justify-content-between mb-3">
-  <button mat-raised-button color="primary" (click)="openAddDoctorModal()">
+
+  <button class="buttondoctor" mat-raised-button color="primary" (click)="openAddDoctorModal()">
     Add Doctor
   </button>
-</div>
+
 
 <!-- Table Container -->
 <div class="mat-elevation-z8">
@@ -13,7 +13,7 @@
 
     <!-- Doctor ID Column -->
     <ng-container matColumnDef="doctorId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Serial No. </th>
       <td mat-cell *matCellDef="let element">{{ element.doctorId }}</td>
     </ng-container>
 

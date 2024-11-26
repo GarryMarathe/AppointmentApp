@@ -1,4 +1,4 @@
-<ng-container *ngIf="isLoggedIn(); else loginTemplate">
+<!-- <ng-container *ngIf="isLoggedIn(); else loginTemplate">
   <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
   <div class="dashboard-layout">
     <app-dashboard-sidebar [open]="sidebarOpen"></app-dashboard-sidebar>
@@ -10,4 +10,29 @@
 
 <ng-template #loginTemplate>
   <router-outlet></router-outlet> 
-</ng-template>
+</ng-template> -->
+
+<!-- Main Application Layout -->
+<div class="app-container">
+  <ng-container *ngIf="isLoggedIn(); else loginTemplate">
+    <!-- Navbar for authenticated users -->
+    <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
+    
+    <!-- Dashboard Layout -->
+    <div class="dashboard-layout">
+      <!-- Sidebar -->
+      <app-dashboard-sidebar [open]="sidebarOpen"></app-dashboard-sidebar>
+      
+      <!-- Content Area (with collapsed class based on sidebar state) -->
+      <div class="content-area" [class.sidebar-collapsed]="!sidebarOpen">
+        <!-- Routed Content for authenticated users -->
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Login Template for non-authenticated users -->
+  <ng-template #loginTemplate>
+    <router-outlet></router-outlet> <!-- This will show the login page if the user is not logged in -->
+  </ng-template>
+</div>

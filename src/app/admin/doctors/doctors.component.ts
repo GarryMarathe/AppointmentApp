@@ -100,6 +100,19 @@ export class DoctorsComponent implements OnInit {
   //   });
   // }
 
+  // loadDoctors() {
+  //   this.isLoading = true;
+  //   this.doctorsService.getDoctors().pipe(
+  //     catchError(error => {
+  //       console.error('Error loading doctors:', error);
+  //       return of([]); // Return an empty array in case of error
+  //     }),
+  //     finalize(() => this.isLoading = false)
+  //   ).subscribe(res => {
+  //     this.dataSource.data = res.doctors;  // Assign data to the dataSource
+  //   });
+  // }
+
   loadDoctors() {
     this.isLoading = true;
     this.doctorsService.getDoctors().pipe(
@@ -109,10 +122,13 @@ export class DoctorsComponent implements OnInit {
       }),
       finalize(() => this.isLoading = false)
     ).subscribe(res => {
-      this.dataSource.data = res.doctors;  // Assign data to the dataSource
+      const doctorsWithSerialNumbers = res.doctors.map((doctor: any, index: number) => ({
+        ...doctor,
+        doctorId: index + 1  // Add serial number based on index
+      }));
+      this.dataSource.data = doctorsWithSerialNumbers;  // Assign data to the dataSource
     });
   }
-
 
 
   applyFilter(event: Event) {

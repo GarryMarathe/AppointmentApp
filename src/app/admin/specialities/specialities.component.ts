@@ -51,34 +51,48 @@ export class SpecialtiesComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort; // Bind MatSort to the dataSource
   }
 
-  // loadSpecialties() {
-  //   this.specialtyService.getAllSpecialties().subscribe(
-  //     (data) => {
-  //       this.dataSource.data = data.specialities;
-  //       // console.log(data)
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching specialties:', error);
-  //     }
-  //   );
-  // }
-  loadSpecialties() {
-    this.loading = true;
-    this.specialtyService.getAllSpecialties().subscribe({
-        next: (data) => {
-            console.log('Loaded specialties:', data);
-            this.dataSource.data = data.specialities;
-        },
-        error: (error) => {
-            console.error('Error fetching specialties:', error);
-            this.snackBar.open('Error loading specialties', 'Close', {
-                duration: 3000,
-            });
-        },
-        complete: () => {
-            this.loading = false;
-        }
-    });
+
+//   loadSpecialties() {
+//     this.loading = true;
+//     this.specialtyService.getAllSpecialties().subscribe({
+//         next: (data) => {
+//             console.log('Loaded specialties:', data);
+//             this.dataSource.data = data.specialities;
+//         },
+//         error: (error) => {
+//             console.error('Error fetching specialties:', error);
+//             this.snackBar.open('Error loading specialties', 'Close', {
+//                 duration: 3000,
+//             });
+//         },
+//         complete: () => {
+//             this.loading = false;
+//         }
+//     });
+// }
+
+loadSpecialties() {
+  this.loading = true;
+  this.specialtyService.getAllSpecialties().subscribe({
+    next: (data) => {
+      console.log('Loaded specialties:', data);
+      // Add a serialNumber based on the index of each item
+      const specialtiesWithSerialNumbers = data.specialities.map((specialty: any, index: number) => ({
+        ...specialty,
+        id: index + 1,  // Add serial number (1-based index)
+      }));
+      this.dataSource.data = specialtiesWithSerialNumbers;
+    },
+    error: (error) => {
+      console.error('Error fetching specialties:', error);
+      this.snackBar.open('Error loading specialties', 'Close', {
+        duration: 3000,
+      });
+    },
+    complete: () => {
+      this.loading = false;
+    }
+  });
 }
 
 openEditDialog(specialty: Specialty) {
