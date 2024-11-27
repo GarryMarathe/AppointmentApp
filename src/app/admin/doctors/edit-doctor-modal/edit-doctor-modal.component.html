@@ -1,6 +1,7 @@
 <h2 mat-dialog-title style="text-align: center;">Edit Doctor</h2>
 <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
   <mat-dialog-content>
+    
     <div class="form-row">
       <mat-form-field appearance ="fill" class="flex-field">
         <mat-label>First Name</mat-label>
@@ -29,8 +30,8 @@
     <div class="form-row">
       <mat-form-field appearance="fill" class="flex-field">
         <mat-label>Specialization</mat-label>
-        <mat-select formControlName="specializationId" required>
-          <mat-option *ngFor="let specialty of data.specialties" [value]="specialty._id">
+        <mat-select formControlName="speciality" required>
+          <mat-option *ngFor="let specialty of specialties" [value]="specialty._id">
             {{ specialty.name }}
           </mat-option>
         </mat-select>
@@ -50,7 +51,7 @@
 
       <mat-form-field appearance="fill" class="flex-field">
         <mat-label>Experience (Years)</mat-label>
-        <input matInput type="number" formControlName="experience" required>
+        <input matInput type="number" formControlName="yearsOfExperience" required>
       </mat-form-field>
     </div>
 
@@ -62,26 +63,39 @@
 
       <mat-form-field appearance="fill" class="flex-field">
         <mat-label>Consultancy Fees</mat-label>
-        <input matInput type="number" formControlName="fees" required>
+        <input matInput type="number" formControlName="consultancyFees" required>
       </mat-form-field>
     </div>
 
     <div class="form-row">
       <mat-form-field appearance="fill" class="flex-field" style="width: 100%;">
         <mat-label>Availability Days</mat-label>
-        <mat-select formControlName="availableDays" multiple>
+        <mat-select formControlName="availabilityDays" multiple>
           <mat-option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</mat-option>
         </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" class="flex-field">
-        <mat-label>Time Slot</mat-label>
-        <input matInput formControlName="timeSlot" placeholder="e.g. 09:00 - 17:00" required>
-        <mat-error *ngIf="doctorForm.get('timeSlot')?.hasError('required')">
-          Time slot is required.
+        <mat-error *ngIf="doctorForm.get('availabilityDays')?.hasError('required')">
+          Please select at least one day
         </mat-error>
-        <mat-error *ngIf="doctorForm.get('timeSlot')?.hasError('pattern')">
-          Time slot must be in the format HH:MM - HH:MM.
+      </mat-form-field>
+    
+      <mat-form-field appearance="fill" formGroupName="timeSlot" class="flex-field">
+        <mat-label>Start Time</mat-label>
+        <input matInput formControlName="startTime" placeholder="e.g. 09:00" required>
+        <mat-error *ngIf="doctorForm.get('startTime')?.hasError('required')">
+          Start time is required
+        </mat-error>
+        <mat-error *ngIf="doctorForm.get('startTime')?.hasError('pattern')">
+          Please use format HH:MM (e.g. 09:00)
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill"  formGroupName="timeSlot" class="flex-field">
+        <mat-label>End Time</mat-label>
+        <input matInput formControlName="endTime" placeholder="e.g. 17:00" required>
+        <mat-error *ngIf="doctorForm.get('endTime')?.hasError('required')">
+          End time is required
+        </mat-error>
+        <mat-error *ngIf="doctorForm.get('endTime')?.hasError('pattern')">
+          Please use format HH:MM (e.g. 17:00)
         </mat-error>
       </mat-form-field>
     </div>
@@ -89,7 +103,7 @@
     <div class="form-row">
       <mat-form-field appearance="fill" class="flex-field" style="width: 100%;">
         <mat-label>About Doctor</mat-label>
-        <textarea matInput formControlName="aboutDoctor" required></textarea>
+        <textarea matInput formControlName="about"></textarea>
       </mat-form-field>
     </div>
   </mat-dialog-content>

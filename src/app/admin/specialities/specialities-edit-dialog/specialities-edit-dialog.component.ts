@@ -149,7 +149,7 @@ export class SpecialtiesEditDialogComponent {
         },
         error: (error) => {
           console.error('Error checking specialty name:', error);
-          this.snackBar.open('Error checking specialty name. Please try again.', 'Close', {
+          this.snackBar.open(error, 'Close', {
             duration: 3000,
             verticalPosition: 'top',
             horizontalPosition: 'center',
@@ -179,7 +179,7 @@ export class SpecialtiesEditDialogComponent {
         },
         error: (error) => {
           console.error('Update error:', error);
-          this.snackBar.open('Error updating specialty. Please try again.', 'Close', {
+          this.snackBar.open(error, 'Close', {
             duration: 3000,
           });
         }

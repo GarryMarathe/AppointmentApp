@@ -66,9 +66,9 @@ export class DoctorsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   specializations!: Specialty[] | never[];
-  specialties: any;
-  
 
+  
+  specialties: Specialty[] = [];
   constructor(
     private dialog: MatDialog,
     private doctorsService: DoctorService,
@@ -89,7 +89,7 @@ export class DoctorsComponent implements OnInit {
 
   // loadSpecializations() {
   //   this.isLoading = true;
-  //   this.doctorsService.getSpecialties().pipe(
+  //   this.doctorsService.getAllSpecialties().pipe(
   //     catchError(error => {
   //       console.error('Error loading specializations:', error);
   //       return of([]);
@@ -140,11 +140,7 @@ export class DoctorsComponent implements OnInit {
     }
   }
 
-  // getSpecializationName(specializationId: number): string {
-  //   const specialization = this.specializations.find(s => s._id === specializationId);
-  //   return specialization?.name || 'Unknown';
-  // }
-
+ 
   // viewDoctor(doctorId: number) {
   //   console.log('View doctor:', doctorId);
   // }
@@ -156,7 +152,7 @@ export class DoctorsComponent implements OnInit {
       catchError(error => {
         
         console.error('Error loading doctor details:', error);
-        this.showError('Failed to load doctor details. Please try again.');
+        this.showError(error);
         return of({ doctor: null });
       }),
       finalize(() => this.isLoading = false)
@@ -179,10 +175,45 @@ export class DoctorsComponent implements OnInit {
       }
     });
   }
-  editDoctor(doctorId: number) {
-    console.log('Edit doctor:', doctorId);
-  }
+  // editDoctor(doctorId: number) {
+  //   console.log('Edit doctor:', doctorId);
+  // }
 
+  editDoctor(doctorId: string) {
+    this.isLoading = true;
+    this.doctorsService.getDoctorById(doctorId).pipe(
+      catchError(error => {
+        console.error('Error loading doctor details for edit:', error);
+        this.snackBar.open(error, 'Close', {
+          duration: 3000,
+        });
+        return of({ doctor: null });
+      }),
+      finalize(() => this.isLoading = false)
+    ).subscribe(result => {
+      if (result.doctor) {
+        // Pass the entire doctor object directly to the modal
+        this.openEditDialog(result.doctor);
+      }
+    });
+  }
+  
+  private openEditDialog(doctor: Doctor) {
+    const dialogRef = this.dialog.open(EditDoctorModalComponent, {
+      width: '600px',
+      data: {
+        doctor: doctor,   // Pass the whole doctor object
+        specialties: this.specialties
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadDoctors(); // Refresh the doctor list after edit
+      }
+    });
+  }
+  
 
  deleteDoctor(doctorId: string) {
   // Ensure dialog is opened correctly
@@ -205,7 +236,7 @@ export class DoctorsComponent implements OnInit {
         // Handle errors
         catchError(error => {
           console.error('Error deleting doctor:', error);
-          this.snackBar.open('Failed to delete doctor. Please try again.', 'Close', {
+          this.snackBar.open(error, 'Close', {
             duration: 3000,
             verticalPosition: 'top',
             horizontalPosition: 'center'

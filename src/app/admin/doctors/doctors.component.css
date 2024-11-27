@@ -1,16 +1,27 @@
 /* Styling for the table and its container */
+
+:host {
+  display: block;
+  background-color: #e2e2e2; /* Light grey background for the whole component */
+  padding: 20px; /* Padding around the entire component */
+  border-radius: 3px; /* Optional: Rounded corners for the component */
+  
+}
 .mat-elevation-z8 {
   background-color: #ffffff;
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 8px;
-  margin: 50px;
+  margin: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
-h2{
-  margin: 30px;
+h2 {
+  margin: 20px;
+  color: #343a40; /* Dark gray for the heading */
+  font-size: 30px;
 }
+
 
 /* Table Header Styles */
 .mat-header-cell {
@@ -145,7 +156,7 @@ h2{
 }
 
 .buttondoctor{
-  margin-left: 30px;
+  margin: 20px;
 }
 
 /* Table Layout */

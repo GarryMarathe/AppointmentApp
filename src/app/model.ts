@@ -28,7 +28,8 @@ export interface Specialty {
 
 
 export interface Doctor {
-    doctorId: any,
+    id: string;
+    doctorId?: any,
     doctorName: string,
     firstName: string,
     lastName: string,
@@ -42,10 +43,34 @@ export interface Doctor {
     about?: string;
     degree?: string;
     licenseNumber?: string;
-    availabilityDays?: string[]; // New field for availability days
+    availabilityDays?: any; // New field for availability days
     availability?: any;
     timeSlot?: any; // New field for time slot
     email?: string; // New field for email
   }
 
+  export interface Patient {
+    userId: string;
+    firstName: string;
+    lastName: string;
+    age: number;
+    gender: string;
+    bloodGroup: string;
+    maritalStatus: string;
+    contactNumber: string;
+    address: string;
+    city: string;
+    state: string;
+    profileImg?: {
+      public_id: string;
+      url: string;
+    };
+    isDeleted: boolean;
+    
+lastAppointmentDate:any;
+
+totalAppointmentsCount:number;
+
+  }
+  
   

@@ -30,7 +30,7 @@ import { Specialty } from '../../../model';
     MatButtonModule,
     MatSnackBarModule,
     MatProgressSpinnerModule
-    
+
   ],
   templateUrl: './add-doctor-modal.component.html',
   styleUrls: ['./add-doctor-modal.component.css']
@@ -57,45 +57,45 @@ export class AddDoctorModalComponent {
     console.log(this.doctorForm); // Now this should log the form structure
     this.fetchSpecialties(); // Fetch specialties when component initializes
     console.log('Specialties:', this.specialties); // Log specialties here
-    
-    
+
+
   }
 
-    // Fetch specialties from backend
-    private fetchSpecialties(): void {
-      this.doctorService.getAllSpecialties().subscribe({
-        next: (response) => {
-          console.log(response)
-          this.specialties = response.specialities; // Set the fetched specialties
-        },
-        error: (error) => {
-          console.error('Error fetching specialties:', error);
-          this.showErrorMessage('Failed to fetch specialties. Please try again.');
-        }
-      });
-    }
+  // Fetch specialties from backend
+  private fetchSpecialties(): void {
+    this.doctorService.getAllSpecialties().subscribe({
+      next: (response) => {
+        console.log(response)
+        this.specialties = response.specialities; // Set the fetched specialties
+      },
+      error: (error) => {
+        console.error('Error fetching specialties:', error);
+        this.showErrorMessage(error);
+      }
+    });
+  }
 
-    private initializeForm(): void {
-      console.log('Initializing form...');  // Debugging log
-      this.doctorForm = this.fb.group({
-        firstName: ['', [Validators.required, Validators.minLength(2)]],
-        lastName: ['', [Validators.required, Validators.minLength(2)]],
-        email: ['', [Validators.required, Validators.email]],
-        speciality: ['', Validators.required], 
-        contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-        licenseNumber: ['', Validators.required],
-        yearsOfExperience: ['', [Validators.required, Validators.min(0)]],
-        degree: ['', Validators.required],
-        consultancyFees: ['', [Validators.required, Validators.min(0)]],
-        about: ['', [Validators.maxLength(500)]],
-        availabilityDays: [[], Validators.required],
-        timeSlot: this.fb.group({
-          startTime: ['', [Validators.required, Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]],
-          endTime: ['', [Validators.required, Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]]
-        })
-      });
-      console.log('Form initialized:', this.doctorForm);
-    }
+  private initializeForm(): void {
+    console.log('Initializing form...');  // Debugging log
+    this.doctorForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      speciality: ['', Validators.required],
+      contactNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      licenseNumber: ['', Validators.required],
+      yearsOfExperience: ['', [Validators.required, Validators.min(0)]],
+      degree: ['', Validators.required],
+      consultancyFees: ['', [Validators.required, Validators.min(0)]],
+      about: ['', [Validators.maxLength(500)]],
+      availabilityDays: [[], Validators.required],
+      timeSlot: this.fb.group({
+        startTime: ['', [Validators.required, Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]],
+        endTime: ['', [Validators.required, Validators.pattern('^([01]?[0-9]|2[0-3]):[0-5][0-9]$')]]
+      })
+    });
+    console.log('Form initialized:', this.doctorForm);
+  }
 
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -108,7 +108,7 @@ export class AddDoctorModalComponent {
     if (this.doctorForm.valid && this.selectedFile) {
       this.isLoading = true;
       const formData = this.prepareFormData();
-  
+
       this.doctorService.addDoctor(formData).pipe(finalize(() => this.isLoading = false)).subscribe({
         next: (response) => {
           this.showSuccessMessage('Doctor added successfully!');
@@ -116,7 +116,7 @@ export class AddDoctorModalComponent {
         },
         error: (error) => {
           console.error('Error adding doctor:', error);
-          this.showErrorMessage('Error adding doctor. Please try again.');
+          this.showErrorMessage(error);
         }
       });
     } else {
@@ -129,9 +129,18 @@ export class AddDoctorModalComponent {
 
     Object.keys(this.doctorForm.value).forEach(key => {
       const value = this.doctorForm.value[key];
-      if (key === 'availableDays' && Array.isArray(value)) {
-        formData.append(key, value.join(',')); // If it’s an array, join the days
-      } else {
+      // Check if the key is 'availableDays' and it's an array
+      if (key === 'availabilityDays' && Array.isArray(value)) {
+        formData.append(key, value.join(',')); // Convert array to comma-separated string
+      }
+
+      // Check if the key is 'timeSlot' and it's an object
+      else if (key === 'timeSlot' && typeof value === 'object' && value !== null) {
+        formData.append(key, JSON.stringify(value)); // Convert object to JSON string
+      }
+
+      // For all other fields, append directly
+      else {
         formData.append(key, value);
       }
     });

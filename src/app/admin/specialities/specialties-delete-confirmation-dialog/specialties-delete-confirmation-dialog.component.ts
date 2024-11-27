@@ -63,7 +63,7 @@ export class SpecialtiesDeleteConfirmationDialogComponent {
             },
             error: (error: any) => {
                 console.error('Error deleting specialty:', error);
-                this.snackBar.open('Error deleting specialty. Please try again.', 'Close', {
+                this.snackBar.open(error, 'Close', {
                     duration: 3000,
                     verticalPosition: 'top',
                     horizontalPosition: 'center',

@@ -98,7 +98,7 @@ export class SpecialtiesAddDialogComponent {
             },
             error: (error) => {
               console.error('Error checking specialty name:', error);
-              this.snackBar.open('Error checking specialty name. Please try again.', 'Close', {
+              this.snackBar.open(error, 'Close', {
                 duration: 3000,
                 verticalPosition: 'top',
             horizontalPosition: 'center',

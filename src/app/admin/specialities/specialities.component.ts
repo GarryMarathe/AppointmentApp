@@ -85,7 +85,7 @@ loadSpecialties() {
     },
     error: (error) => {
       console.error('Error fetching specialties:', error);
-      this.snackBar.open('Error loading specialties', 'Close', {
+      this.snackBar.open(error, 'Close', {
         duration: 3000,
       });
     },

@@ -1,14 +1,15 @@
-<h2 class="heading">View All Doctors</h2>
+<h2>View All Doctors</h2>
 
 <!-- Add Doctor Button -->
 
-  <button class="buttondoctor" mat-raised-button color="primary" (click)="openAddDoctorModal()">
-    Add Doctor
-  </button>
+  
 
 
 <!-- Table Container -->
 <div class="mat-elevation-z8">
+  <button class="buttondoctor" mat-raised-button color="primary" (click)="openAddDoctorModal()">
+    Add Doctor
+  </button>
   <table mat-table [dataSource]="dataSource" matSort>
 
     <!-- Doctor ID Column -->
@@ -84,7 +85,7 @@
           <button mat-icon-button color="primary" (click)="viewDoctor(element._id)" matTooltip="View">
             <mat-icon class="actions-icon">visibility</mat-icon>
           </button>
-          <button mat-icon-button color="accent" (click)="editDoctor(element.doctorId)" matTooltip="Edit">
+          <button mat-icon-button color="accent" (click)="editDoctor(element._id)" matTooltip="Edit">
             <mat-icon class="actions-icon">edit</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="deleteDoctor(element._id)" matTooltip="Delete">
