@@ -10,12 +10,12 @@ import { DoctorDashboardComponent } from './doctor/doctor-dashboard/doctor-dashb
 import { MyAppointmentComponent } from './doctor/my-appointment/my-appointment.component';
 import { RoleGuard } from './services/role.guard';
 import { DoctorsComponent } from './admin/doctors/doctors.component';
+import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-
-  // Login route
+   // Login route
   { path: 'login', component: LoginPageComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   // { path: 'admin/specialties', component: SpecialtiesComponent },
   // Admin routes - Protected by RoleGuard with 'admin' role
   {

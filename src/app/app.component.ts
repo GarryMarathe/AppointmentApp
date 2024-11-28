@@ -1,28 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardSidebarComponent } from './components/dashboard-sidebar/dashboard-sidebar.component';
-import { AuthService } from './services/auth.service'; // Import AuthService
+import { AuthService } from './services/auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, DashboardSidebarComponent,CommonModule],
+  imports: [RouterOutlet, NavbarComponent, DashboardSidebarComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   sidebarOpen = true;
-  title: any;
 
-  constructor(private authService: AuthService) {} // Inject AuthService
-
+  constructor(private authService: AuthService) {}
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
   }
 
   isLoggedIn(): boolean {
-    return this.authService.isLoggedIn(); // Check if the user is logged in
+    return this.authService.isLoggedIn();
   }
+  ngOnInit() {
+    // this.authService.checkSession().subscribe();
+  }
+
+ 
 }

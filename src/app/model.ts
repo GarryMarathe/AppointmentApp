@@ -73,4 +73,15 @@ totalAppointmentsCount:number;
 
   }
   
+
+  export interface Appointment {
+    appointmentId: string;
+    patientName: string;
+    appointmentDate: string;
+    doctorId: string;  // Make sure doctorId is part of the appointment
+    doctorName?: string;
+    specialty?: string;
+    status: string;
+  }
+  
   
