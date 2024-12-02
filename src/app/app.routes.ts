@@ -11,11 +11,19 @@ import { MyAppointmentComponent } from './doctor/my-appointment/my-appointment.c
 import { RoleGuard } from './services/role.guard';
 import { DoctorsComponent } from './admin/doctors/doctors.component';
 import { AuthGuard } from './services/auth.guard';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { LandingpageComponent } from './components/landingpage/landingpage.component';
 
 export const routes: Routes = [
    // Login route
+   { path: '', component: LandingpageComponent },
   { path: 'login', component: LoginPageComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'register', component: RegistrationPageComponent },  // Register page route
+    { path: 'forgot-password',component: ForgotPasswordComponent },// Forgot password page route
+    { path: 'reset-password', component: ResetPasswordComponent },  // Reset password page route
+
   // { path: 'admin/specialties', component: SpecialtiesComponent },
   // Admin routes - Protected by RoleGuard with 'admin' role
   {

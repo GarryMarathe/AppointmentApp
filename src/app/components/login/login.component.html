@@ -1,46 +1,202 @@
-<div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card p-4 shadow-sm rounded">
-                <h2 class="text-center mb-4">Login</h2>
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <!-- Email Field -->
-                    <div class="form-group">
-                        <mat-form-field appearance="fill" class="w-100">
-                            <mat-label>Email</mat-label>
-                            <input matInput formControlName="email" value="john.doe@example.com" placeholder="Enter your email" required />
-                            <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-                                <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</span>
-                                <span *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</span>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
+<!-- <html>
+<head>
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
 
-                    <!-- Password Field -->
-                    <div class="form-group">
-                        <mat-form-field appearance="fill" class="w-100">
-                            <mat-label>Password</mat-label>
-                            <input matInput type="password" formControlName="password" value="password123" placeholder="Enter your password" required />
-                            <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-                                <span *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</span>
-                                <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</span>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
 
-                    <!-- Error Message -->
-                    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+        .card {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px; /* Set max width of the card */
+        }
 
-                    <!-- Submit Button -->
-                    <button mat-raised-button color="primary" type="submit" class="btn btn-primary w-100">Login</button>
+        .card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-                    <!-- Link to Sign Up -->
-                    <div class="text-center mt-3">
-                        <span class="text-muted">Don't have an account?</span>
-                        <a href="/register" class="text-primary">Sign up here</a>
-                    </div>
-                </form>
-            </div>
+        .card form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .card form .btn {
+            width: 100%;
+        }
+
+        .card form .link {
+            text-align: center;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Style for the "Already Have an Account" and "Login here" links */
+        .form-text {
+            display: flex;
+            justify-content: center; /* Align text centrally */
+            gap: 5px; /* Space between the two elements */
+        }
+
+        .form-text .black-text {
+            color: black; /* Styling for "Already Have an Account?" in black */
+        }
+
+        .form-text a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        .form-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="card">
+            <h2>Login</h2>
+            <p class="text-center">Please sign in to continue</p>
+            <form>
+                <div class="form-group">
+                    <label for="loginEmail">Email address</label>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <p class="form-text text-center mt-3">
+                    <span class="black-text">Didn't Have Account?</span>
+                    <a href="#">Register Here</a>
+                </p>
+            </form>
         </div>
     </div>
-</div>
+</body>
+</html>
+
+ -->
+
+ <!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@angular/material@15.0.0/bundles/material.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        
+        <div class="card">
+            <h2>Login</h2>
+            <p class="text-center">Please sign in to continue</p>
+            <form>
+                <div class="form-group">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Email address</mat-label>
+                        <input matInput type="email" id="loginEmail" placeholder="Enter your email">
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="fill" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" id="loginPassword" placeholder="Enter your password">
+                    </mat-form-field>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <p class="form-text text-center mt-3">
+                    <span class="black-text">Didn't Have Account?</span>
+                    <a [routerLink]="'/register'">Register Here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@angular/material@15.0.0/bundles/material.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <!-- Login Card -->
+        <div class="card">
+            <h2>Login</h2>
+            <p class="text-center">Please sign in to continue</p>
+            <!-- Bind the form to loginForm -->
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Email address</mat-label>
+                        <input matInput type="email" formControlName="email" placeholder="Enter your email" id="loginEmail">
+                        <mat-error *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched">
+                            Email is required.
+                        </mat-error>
+                        <mat-error *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched">
+                            Invalid email format.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="password" placeholder="Enter your password" id="loginPassword">
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+                            Password is required.
+                        </mat-error>
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched">
+                            Password must be at least 6 characters.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Sign In</button>
+                
+                <p class="form-text text-center mt-3">
+                    <span class="black-text">Don't have an account?</span>
+                    <a [routerLink]="'/register'">Register Here</a>
+                </p>
+                 <!-- Forgot Password Link -->
+                 <p class="form-text text-center mt-2">
+                    <a [routerLink]="'/forgot-password'">Forgot Password?</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

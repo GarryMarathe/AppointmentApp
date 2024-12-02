@@ -6,11 +6,18 @@ import { User } from '../model';
 
 const BASE_URL = 'http://localhost:4000/api';
 
+interface ResetPasswordResponse {
+  success: boolean;
+  message: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = `${BASE_URL}/auth`;
+  private forgotPasswordUrl = `${BASE_URL}/auth/forgot-password`; // New API endpoint for forgot password
+  private resetPasswordUrl = `${BASE_URL}/auth/reset-password`; // New API endpoint for reset password
   private currentUser = new BehaviorSubject<User | null>(null);
   private http = inject(HttpClient);
 
@@ -66,9 +73,9 @@ export class AuthService {
     return this.currentUser.getValue() !== null;
   }
 
-  logout(): void {
-    this.currentUser.next(null);
-  }
+  // logout(): void {
+  //   this.currentUser.next(null);
+  // }
 
   setUser(user: User): void {
     this.currentUser.next(user);
@@ -77,4 +84,65 @@ export class AuthService {
   getUser(): User | null {
     return this.currentUser.getValue();
   }
+
+  // New method for "Forgot Password" functionality
+  forgotPassword(email: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const body = { email };
+
+    return this.http.post<any>(this.forgotPasswordUrl, body, { headers }).pipe(
+      map(response => {
+        return response; // Return the response for further processing if needed
+      }),
+      catchError(error => {
+        console.error('Forgot password error:', error);
+        throw error; // Rethrow the error for handling in the component
+      })
+    );
+  }
+
+   // Method for "Reset Password" functionality
+resetPassword(token: string, newPassword: string): Observable<ResetPasswordResponse> {
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  const body = { password: newPassword };
+
+  return this.http.put<ResetPasswordResponse>(
+    `${this.resetPasswordUrl}?token=${token}`, 
+    body, 
+    { headers }
+  ).pipe(
+    map(response => {
+      if (!response.success) {
+        throw new Error(response.message || 'Password reset failed');
+      }
+      return response;
+    }),
+    catchError(error => {
+      console.error('Reset password error:', error);
+      throw error;
+    })
+  );
+}
+
+logout(): Observable<boolean> {
+  return this.http.get<{success: boolean}>(
+    `${this.apiUrl}/logout`, 
+    { 
+      withCredentials: true  // Critical for cookie-based token deletion
+    }
+  ).pipe(
+    tap(() => {
+      // Reset current user state
+      this.currentUser.next(null);
+    }),
+    map(response => response.success),
+    catchError(error => {
+      console.error('Logout error:', error);
+      // Even if logout fails, clear the current user
+      this.currentUser.next(null);
+      return of(false);
+    })
+  );
+}
+
 }

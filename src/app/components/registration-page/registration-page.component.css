@@ -1,0 +1,73 @@
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Keeps the form vertically centered */
+    margin: 0;
+}
+
+/* Centering the container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    min-height: 40vh;
+}
+
+/* Card styling */
+.card {
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px; /* Set max width of the card */
+    min-height: 300px;/* Minimum height of the card */
+    margin:20px;
+}
+
+.card h2 {
+    text-align: center;
+    margin-bottom: 10px; /* Reduced space between title and form */
+    font-size: 30px;
+}
+
+.card form .form-group {
+    margin-bottom: 2px; /* Spacing between fields */
+}
+
+.card form .btn-primary {
+    background-color: #4a90e2;
+    border: none;
+    font-size: 16px;
+}
+
+.card form .btn-primary:hover {
+    background-color: #357ab8;
+}
+
+/* Styling for the "Already have an account?" and "Login Here" link */
+.form-text {
+    display: flex;
+    justify-content: center; /* Align text centrally */
+    gap: 3px; /* Space between the two elements */
+}
+
+.form-text .black-text {
+    color: black; /* Styling for "Already Have an Account?" in black */
+}
+
+.form-text a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.form-text a:hover {
+    text-decoration: underline;
+}
+
+.mat-form-field {
+    width: 100%; /* Make the Angular Material form fields 100% wide */
+    height:50%;
+}

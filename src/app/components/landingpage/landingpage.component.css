@@ -1,0 +1,177 @@
+/* Ensure full height for the body and html */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Page layout with flexbox */
+.landing-page-container {
+  display: flex;
+  flex-direction: column;  /* Stack the content and footer vertically */
+  min-height: 100vh;       /* Full viewport height */
+  justify-content: space-between;  /* Push footer to bottom */
+  padding: 20px;
+}
+
+/* Ensure the content takes available space */
+.landing-page-container > .landing-page-content {
+  flex: 1;  /* This allows content to take up all remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Vertically center the content */
+  align-items: center;      /* Center the content horizontally */
+}
+
+/* You can style the content inside the landing page as needed */
+.landing-page-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.landing-page-container p {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+
+/* Adjust button styling */
+.landing-page-container button {
+  font-size: 1.25rem;
+  padding: 12px 20px;
+  background-color: #8354ff;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.landing-page-container button:hover {
+  background-color: #7a2de3;  /* Slightly darker shade for hover effect */
+}
+
+.hero-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background: linear-gradient(135deg, 
+    #4400b1 0%, 
+    #5100cf 10%, 
+    #5d16e4 20%, 
+    #6a2ef0 30%, 
+    #8354ff 50%, 
+    #9b7aff 60%, 
+    #b49cff 70%, 
+    #cebdff 80%, 
+    #e8ddff 90%);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+.hero-section .hero-content {
+  max-width: 600px; /* Max width to avoid text stretching on large screens */
+  width: 100%;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Button Styling */
+.hero-section button {
+  font-size: 1.2rem;
+  padding: 12px 24px;
+  background-color: #9b7aff;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.hero-section button:hover {
+  background-color: #7a2de3; /* Darker shade on hover */
+  cursor: pointer;
+}
+
+.speciality-section {
+  padding: 4rem 2rem;
+  background-color: #fff;
+}
+
+.speciality-list {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  overflow-x: scroll;
+  padding-top: 2rem;
+}
+
+.speciality-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.speciality-item:hover {
+  transform: translateY(-10px);
+}
+
+.speciality-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.speciality-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+.speciality-card p {
+  font-size: 0.875rem;
+  text-align: center;
+}
+/* Responsiveness */
+@media (min-width: 640px) {
+  .speciality-card img {
+    width: 80px;
+  }
+}
+
+
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem; /* Smaller font size on mobile */
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .hero-section {
+    height: auto; /* Allow for smaller content to fit on mobile */
+    padding: 40px 20px; /* Adjust padding for smaller screens */
+  }
+
+  .hero-section button {
+    padding: 10px 20px; /* Adjust button padding on smaller screens */
+  }
+}

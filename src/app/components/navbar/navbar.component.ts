@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
   @Output() toggleSidebar = new EventEmitter<void>();
   username: string | null = null;
   role: string | null = null;
+  isLogouting = false; // Added to prevent multiple logout attempts
 
   constructor(private authService: AuthService, private router: Router) {} // Inject Router
 
@@ -29,9 +30,21 @@ export class NavbarComponent implements OnInit {
     return this.role ? `Welcome ${this.role.charAt(0).toUpperCase() + this.role.slice(1)}!!` : '';
   }
 
-  // Logout method
   logout(): void {
-    this.authService.logout(); // Call logout method from AuthService
-    this.router.navigate(['/login']); // Redirect to login page
+    // Prevent multiple logout attempts
+    if (this.isLogouting) return;
+
+    this.isLogouting = true;
+    this.authService.logout().subscribe({
+      next: (success) => {
+        this.isLogouting = false;
+        // Always navigate to login, regardless of logout success
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        this.isLogouting = false;
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

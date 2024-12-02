@@ -1,7 +1,7 @@
 import { createRequire } from 'module';const require = createRequire(import.meta.url);
 import {
   MatCommonModule
-} from "./chunk-TVLKIQXI.js";
+} from "./chunk-XE6DPQBX.js";
 import {
   CommonModule,
   NgTemplateOutlet

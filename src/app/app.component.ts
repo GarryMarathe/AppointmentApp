@@ -28,4 +28,10 @@ export class AppComponent implements OnInit {
   }
 
  
+  isDarkTheme = false;
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    document.body.className = this.isDarkTheme ? 'dark-theme' : 'light-theme';
+  }
 }

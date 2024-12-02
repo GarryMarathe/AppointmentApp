@@ -1,23 +1,66 @@
-/* Reset default margin and height */
-html, body {
-    height: 100%; /* Ensure full height */
-    margin: 0; /* Remove default margin */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
 }
 
-/* Full height container */
-.container-fluid {
-    height: 100vh; /* Full viewport height */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-/* Card styling */
 .card {
-    padding: 20px; /* Padding inside the card */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    width: 30vw; /* Width of the card */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
 }
 
-/* Ensure mat-form-field takes full width */
+.card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    
+}
+
+.card form .form-group {
+    margin-bottom: 15px;
+}
+
+.card form .btn {
+    width: 100%;
+}
+
+.card form .link {
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Style for the "Already Have an Account" and "Login here" links */
+.form-text {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.form-text .black-text {
+    color: black;
+}
+
+.form-text a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.form-text a:hover {
+    text-decoration: underline;
+}
+
 .mat-form-field {
-    width: 100%; /* Full width for material form fields */
+    width: 100%;
 }

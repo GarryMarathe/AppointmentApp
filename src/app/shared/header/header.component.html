@@ -1,0 +1,24 @@
+<mat-toolbar color="primary" class="custom-navbar">
+  <!-- Left side: Logo -->
+  <div class="app-title">
+    <a href="#" class="logo-link">DocPatient</a>
+  </div>
+
+  <!-- Center: Navbar Links -->
+  <div class="navbar-links">
+    <a mat-button href="#">Home</a>
+    <a mat-button href="#">Doctors</a>
+    <a mat-button href="#">About</a>
+    <a mat-button href="#">Contact</a>
+  </div>
+
+  <!-- Right side: Login/Register Button and Dummy Profile Icon -->
+  <div class="profile-login-wrapper">
+    <button mat-raised-button color="primary" (click)="onRegisterLoginClick()">Register / Login</button>
+
+    <div class="profile-icon">
+      <!-- Dummy profile icon, placeholder image -->
+      <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Dummy Profile" />
+    </div>
+  </div>
+</mat-toolbar>
