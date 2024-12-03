@@ -1,126 +1,131 @@
 /* Custom Navbar Styling */
 .custom-navbar {
-    background-color: #8354ff; /* Set navbar color to #8354ff */
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space out the items */
-    padding: 0 20px; /* Optional: Add padding to the left and right */
-    border-radius: 15px;
-    position: relative; /* Ensure the navbar can hold the centered links */
+  background-color: #8354ff; /* Set navbar color to #8354ff */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center items vertically */
+  justify-content: space-between; /* Space out the items */
+  padding: 0 20px; /* Optional: Add padding to the left and right */
+  border-radius: 15px;
+  position: relative; /* Ensure the navbar can hold the centered links */
+}
+
+/* Ensure Spacer pushes elements like navbar links and profile icon */
+.spacer {
+  flex: 1;
+}
+
+/* Logo Styling */
+.app-title {
+  color: white;
+}
+
+.app-title .logo-link {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Navbar Links Styling */
+.navbar-links {
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center the links horizontally */
+  align-items: center; /* Align items vertically */
+  gap: 16px; /* Space between links */
+  position: absolute; /* Absolute position to center the links in the navbar */
+  left: 50%; /* Position from the left */
+  transform: translateX(-50%); /* Shift the navbar to the left by half of its width */
+}
+
+.navbar-links a {
+  background: none; /* Remove background */
+  border: none; /* Remove borders */
+  color: white; /* White text color */
+  font-size: 16px; /* Adjust font size */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.navbar-links a:hover {
+  background-color: #9b7aff; /* Change color on hover */
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/* Avatar Styling */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Circular avatar */
+  object-fit: cover; /* Ensure the image covers the entire circle without distortion */
+  margin-right: 10px; /* Space between avatar and user role */
+}
+
+/* Profile Section Styling */
+.profile-section {
+  display: flex;
+  align-items: center;
+}
+
+/* Wrapper for Login/Register Button and Profile Icon */
+.profile-login-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Space between the login button and the profile icon */
+}
+
+/* Register/Login Button Styling */
+.mat-raised-button.mat-accent {
+  background-color: #9b7aff;
+  color: white;
+  padding: 6px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.mat-raised-button.mat-accent:hover {
+  background-color: #8354ff; /* Slightly darker shade on hover */
+}
+
+/* Remove the default background and border of mat-menu-item */
+.mat-menu-panel {
+  display: flex !important; /* Force flexbox layout */
+  flex-direction: column !important; /* Ensure items are stacked vertically */
+  padding: 0 !important; /* Remove any unwanted padding */
+  min-width: 150px; /* Set a minimum width for the menu */
+  background-color: transparent; /* Make background transparent */
+  box-shadow: none; /* Remove the box-shadow */
+}
+
+.mat-menu-item {
+  padding: 12px 16px; /* Padding around menu items */
+  font-size: 14px; /* Adjust font size */
+  color: white; /* Text color for items */
+  background-color: transparent; /* Make background transparent */
+  border: none; /* Remove any border */
+}
+
+.mat-menu-item:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
+  color: rgb(159, 159, 253); /* Change text color on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .custom-navbar {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  /* Ensure Spacer pushes elements like navbar links and profile icon */
-  .spacer {
-    flex: 1;
-  }
-  
-  /* Logo Styling */
-  .app-title {
-    color: white;
-  }
-  
-  .app-title .logo-link {
-    text-decoration: none;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  /* Navbar Links Styling */
+
   .navbar-links {
-    display: flex; /* Use flexbox for layout */
-    justify-content: center; /* Center the links horizontally */
-    align-items: center; /* Align items vertically */
-    gap: 16px; /* Space between links */
-    position: absolute; /* Absolute position to center the links in the navbar */
-    left: 50%; /* Position from the left */
-    transform: translateX(-50%); /* Shift the navbar to the left by half of its width */
+    flex-direction: column;
+    gap: 10px;
+    left: 0;
+    transform: none; /* Remove translation on smaller screens */
   }
-  
-  .navbar-links a {
-    background: none; /* Remove background */
-    border: none; /* Remove borders */
-    color: white; /* White text color */
-    font-size: 16px; /* Adjust font size */
-    cursor: pointer; /* Change cursor on hover */
-  }
-  
-  .navbar-links a:hover {
-    background-color: #9b7aff; /* Change color on hover */
-    color: white;
-    border-radius: 10px;
-    padding: 10px;
-  }
-  
-  /* Profile Icon Styling */
-  .profile-icon img {
-    width: 40px; /* Set the desired width */
-    height: 40px; /* Set the desired height */
-    border-radius: 50%; /* Make it circular */
-    cursor: pointer; /* Change cursor on hover */
-  }
-  
-  /* Wrapper for Login/Register Button and Profile Icon */
+
   .profile-login-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 30px; /* Space between the login button and the profile icon */
+    margin-top: 10px;
   }
-  
-  /* Add the Login/Register Button Styling */
-  .login-register-btn {
-    padding: 6px 12px;
-    background-color: #9b7aff;
-    color: white;
-    border: none;
-    border-radius: 1px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .login-register-btn:hover {
-    background-color: #9b7aff;
-  }
-  
-  /* Remove the default background and border of mat-menu-item */
-  .mat-menu-panel {
-    display: flex !important; /* Force flexbox layout */
-    flex-direction: column !important; /* Ensure items are stacked vertically */
-    padding: 0 !important; /* Remove any unwanted padding */
-    min-width: 150px; /* Set a minimum width for the menu */
-    background-color: transparent; /* Make background transparent */
-    box-shadow: none; /* Remove the box-shadow */
-  }
-  
-  .mat-menu-item {
-    padding: 12px 16px; /* Padding around menu items */
-    font-size: 14px; /* Adjust font size */
-    color: white; /* Text color for items */
-    background-color: transparent; /* Make background transparent */
-    border: none; /* Remove any border */
-  }
-  
-  .mat-menu-item:hover {
-    background-color: rgba(0, 0, 0, 0.1); /* Light background on hover */
-    color: rgb(159, 159, 253); /* Change text color on hover */
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .custom-navbar {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .navbar-links {
-      flex-direction: column;
-      gap: 10px;
-      left: 0;
-      transform: none; /* Remove translation on smaller screens */
-    }
-  
-    .profile-login-wrapper {
-      margin-top: 10px;
-    }
-  }
-  
+}

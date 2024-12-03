@@ -1,46 +1,60 @@
 body {
     background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Keeps the form vertically centered */
     margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Stack navbar and content */
+    min-height: 100vh; /* Ensure the body takes the full viewport height */
 }
 
-/* Centering the container */
+/* Navbar is fixed at the top */
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999; /* Ensure navbar stays on top */
+}
+
+/* Centering the container for the form */
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    min-height: 40vh;
+    width: 100%;
+    min-height: 60vh; /* Reduce the height of the form container */
+    margin-top: 70px; /* To ensure it doesn't overlap the fixed navbar */
 }
 
 /* Card styling */
 .card {
-    padding: 8px;
+    padding: 10px;  /* Reduced padding for a smaller form */
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 1000px; /* Set max width of the card */
-    min-height: 300px;/* Minimum height of the card */
-    margin:20px;
+    max-width: 600px; /* Make the card width smaller */
+    min-height: 300px; /* Reduced minimum height */
+    background-color: #fff;
 }
 
+/* Title styling inside card */
 .card h2 {
     text-align: center;
-    margin-bottom: 10px; /* Reduced space between title and form */
-    font-size: 30px;
+    margin-bottom: 8px; /* Reduced space between title and form */
+    font-size: 26px;
 }
 
+/* Adjust spacing between fields */
 .card form .form-group {
-    margin-bottom: 2px; /* Spacing between fields */
+    margin-bottom: 5px; /* Reduced margin between fields */
 }
 
+/* Button Styling */
 .card form .btn-primary {
     background-color: #4a90e2;
     border: none;
     font-size: 16px;
+    padding: 8px 16px;  /* Slightly adjusted padding for button */
 }
 
 .card form .btn-primary:hover {
@@ -51,11 +65,11 @@ body {
 .form-text {
     display: flex;
     justify-content: center; /* Align text centrally */
-    gap: 3px; /* Space between the two elements */
+    gap: 3px;
 }
 
 .form-text .black-text {
-    color: black; /* Styling for "Already Have an Account?" in black */
+    color: black;
 }
 
 .form-text a {
@@ -67,7 +81,56 @@ body {
     text-decoration: underline;
 }
 
+/* Angular Material Form Fields */
 .mat-form-field {
-    width: 100%; /* Make the Angular Material form fields 100% wide */
-    height:50%;
+    width: 100%; /* Make the form fields fill 100% of the width */
+    margin-bottom: 4px;  /* Reduced margin between material fields */
+    height: auto; /* Let the height adjust according to content */
+    min-height: 40px;  /* Ensure it's not too tall */
 }
+
+/* Input field padding for Angular Material fields */
+.mat-input-element {
+    padding: 4px 8px; /* Reduced padding for inputs */
+    font-size: 14px; /* Reduce font size of inputs */
+}
+
+/* Adjust the height for select dropdowns (e.g. for State and City) */
+.mat-select-value {
+    padding: 4px 8px; /* Reduced padding for mat-select */
+    font-size: 14px; /* Reduced font size for mat-select */
+}
+
+/* Adjust the height for error messages */
+.mat-error {
+    font-size: 12px; /* Smaller font for error messages */
+    margin-top: 2px;
+}
+
+/* Styling for error snackbar */
+.error-snackbar {
+    background-color: #f44336;  /* Red background for errors */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;  /* Optional: rounded corners */
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        min-height: auto;
+        margin-top: 50px; /* Add more space from the top */
+    }
+
+    .card {
+        max-width: 500px;
+    }
+
+    /* Adjust input fields and button on small screens */
+    .mat-form-field, .btn-primary {
+        font-size: 14px;
+    }
+}
+    

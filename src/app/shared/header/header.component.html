@@ -1,24 +1,39 @@
-<mat-toolbar color="primary" class="custom-navbar">
-  <!-- Left side: Logo -->
+<mat-toolbar color="primary" *ngIf="showHeader" class="custom-navbar">
+  <!-- Left: Logo -->
   <div class="app-title">
-    <a href="#" class="logo-link">DocPatient</a>
+    <a routerLink="/" class="logo-link">DocPatient</a>
   </div>
 
-  <!-- Center: Navbar Links -->
+  <!-- Center: Navigation -->
   <div class="navbar-links">
-    <a mat-button href="#">Home</a>
-    <a mat-button href="#">Doctors</a>
-    <a mat-button href="#">About</a>
-    <a mat-button href="#">Contact</a>
+    <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a mat-button routerLink="/doctors" routerLinkActive="active">Doctors</a>
+    <a mat-button routerLink="/about" routerLinkActive="active">About</a>
+    <a mat-button routerLink="/contact" routerLinkActive="active">Contact</a>
   </div>
 
-  <!-- Right side: Login/Register Button and Dummy Profile Icon -->
+  <!-- Right: Auth -->
   <div class="profile-login-wrapper">
-    <button mat-raised-button color="primary" (click)="onRegisterLoginClick()">Register / Login</button>
+    <button 
+      *ngIf="!isLoggedIn" 
+      mat-raised-button 
+      color="accent" 
+      (click)="onRegisterLoginClick()">
+      Register / Login
+    </button>
 
-    <div class="profile-icon">
-      <!-- Dummy profile icon, placeholder image -->
-      <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Dummy Profile" />
+    <div *ngIf="isLoggedIn" class="profile-section">
+      <img [src]="userAvatar" [alt]="userRole + ' avatar'" class="avatar"/>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <span>{{ userRole }}</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onLogoutClick()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
     </div>
   </div>
 </mat-toolbar>

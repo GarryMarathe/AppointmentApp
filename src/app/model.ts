@@ -16,6 +16,7 @@ export interface User {
     email: string; // User email
     role: Role; // Role object (references the Role interface)
     isDeleted: boolean; // Indicates if the user is deleted
+    avatar: any;
     // Add other user fields if necessary
 }
 

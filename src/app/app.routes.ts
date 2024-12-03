@@ -18,9 +18,18 @@ import { LandingpageComponent } from './components/landingpage/landingpage.compo
 
 export const routes: Routes = [
    // Login route
-   { path: '', component: LandingpageComponent },
-  { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegistrationPageComponent },  // Register page route
+   { path: '', component: LandingpageComponent},
+  { 
+    path: 'login', 
+    component: LoginPageComponent, 
+    canActivate: [AuthGuard],  // Protect the login route 
+  },
+  { 
+    path: 'register', 
+    component: RegistrationPageComponent, 
+    canActivate: [AuthGuard],  // Protect the register route
+    data: { redirectTo: 'landing' } 
+  },  
     { path: 'forgot-password',component: ForgotPasswordComponent },// Forgot password page route
     { path: 'reset-password', component: ResetPasswordComponent },  // Reset password page route
 

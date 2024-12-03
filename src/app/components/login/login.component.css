@@ -4,6 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    
 }
 
 .container {
@@ -19,6 +20,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
+    margin-top: 10vh;
 }
 
 .card h2 {

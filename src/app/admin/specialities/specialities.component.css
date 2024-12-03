@@ -17,11 +17,12 @@
 
 /* Heading Styles */
 h2 {
-    margin-bottom: 20px;
-    color: #343a40; /* Dark gray for the heading */
+    margin: 20px;
+    color: #343a40;
     font-size: 30px;
-}
-
+    font-weight: 600;
+  }
+  
 /* Table Styles */
 table {
     width: 100%;

@@ -1,31 +1,19 @@
-<!-- <ng-container *ngIf="isLoggedIn(); else loginTemplate">
-  <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
-  <div class="dashboard-layout">
-    <app-dashboard-sidebar [open]="sidebarOpen"></app-dashboard-sidebar>
-    <div class="content-area" [class.sidebar-collapsed]="!sidebarOpen">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</ng-container>
-
-<ng-template #loginTemplate>
-  <router-outlet></router-outlet> 
-</ng-template> -->
-
-<!-- Main Application Layout -->
 <div class="app-container">
   <ng-container *ngIf="isLoggedIn(); else loginTemplate">
-    <!-- Navbar for authenticated users -->
-    <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
+    <!-- Only show navbar for non-patient roles -->
+    <ng-container *ngIf="authService.getUserRole() !== 'patient'">
+      <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
+    </ng-container>
     
     <!-- Dashboard Layout -->
     <div class="dashboard-layout">
-      <!-- Sidebar -->
-      <app-dashboard-sidebar [open]="sidebarOpen"></app-dashboard-sidebar>
+      <!-- Sidebar for non-patient roles -->
+      <ng-container *ngIf="authService.getUserRole() !== 'patient'">
+        <app-dashboard-sidebar [open]="sidebarOpen"></app-dashboard-sidebar>
+      </ng-container>
       
-      <!-- Content Area (with collapsed class based on sidebar state) -->
-      <div class="content-area" [class.sidebar-collapsed]="!sidebarOpen">
-        <!-- Routed Content for authenticated users -->
+      <!-- Content Area -->
+      <div class="content-area">
         <router-outlet></router-outlet>
       </div>
     </div>
@@ -33,6 +21,6 @@
 
   <!-- Login Template for non-authenticated users -->
   <ng-template #loginTemplate>
-    <router-outlet></router-outlet> <!-- This will show the login page if the user is not logged in -->
+    <router-outlet></router-outlet>
   </ng-template>
 </div>

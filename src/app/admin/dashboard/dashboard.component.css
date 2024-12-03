@@ -7,6 +7,14 @@
     background-color: #f8f9fa;
 }
 
+h2 {
+    margin: 20px;
+    color: #343a40;
+    font-size: 30px;
+    font-weight: 600;
+  }
+  
+
 .card {
     border: none;
     border-radius: 10px;

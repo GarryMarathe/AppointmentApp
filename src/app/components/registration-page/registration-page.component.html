@@ -212,108 +212,221 @@
  -->
 
  <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container mt-5 col-lg-6"> <!-- Added margin to the container for spacing -->
-        <div class="card p-4"> <!-- Added padding to the card for spacing -->
-            <h2>Register</h2>
-            <p class="text-center">Please Register to continue</p>
-            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"> <!-- Bind form to registerForm -->
-                <div class="row">
-                    <!-- First Name and Last Name on the same line -->
-                    <div class="col-md-6 form-group">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>First Name</mat-label>
-                            <input matInput formControlName="firstName" placeholder="Enter your First Name" id="firstName">
-                            <mat-error *ngIf="registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched">
-                                First Name is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Last Name</mat-label>
-                            <input matInput formControlName="lastName" placeholder="Enter your Last Name" id="lastName">
-                            <mat-error *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched">
-                                Last Name is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-
-                <div class="row mt-2"> <!-- Added margin-top for spacing between rows -->
-                    <!-- Email and Date of Birth on the same line -->
-                    <div class="col-md-6 form-group">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Email address</mat-label>
-                            <input matInput formControlName="email" type="email" placeholder="Enter your email" id="email">
-                            <mat-error *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+ <html lang="en">
+ 
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Register</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ </head>
+ 
+ <body>
+     <div class="container mt-5 col-lg-8"> <!-- Wider container for more space -->
+         <div class="card p-4">
+             <h2>Register</h2>
+             <p class="text-center">Please Register to continue</p>
+             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                 
+                 <!-- First Name and Last Name on the same line -->
+                 <div class="row">
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>First Name</mat-label>
+                             <input matInput formControlName="firstName" placeholder="Enter your First Name" id="firstName">
+                             <mat-error *ngIf="registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched">
+                                 First Name is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Last Name</mat-label>
+                             <input matInput formControlName="lastName" placeholder="Enter your Last Name" id="lastName">
+                             <mat-error *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched">
+                                 Last Name is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                 </div>
+     
+                 <!-- Email and Date of Birth on the same line -->
+                 <div class="row mt-2">
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Age</mat-label>
+                             <input matInput formControlName="age" type="number" placeholder="Enter your age" id="age">
+                             <mat-error *ngIf="registerForm.get('age')?.hasError('required') && registerForm.get('email')?.touched">
+                                 Age is required.
+                             </mat-error>
+                             <mat-error *ngIf="registerForm.get('age')?.hasError('min') && registerForm.get('age')?.touched">
+                                 Age must be at least 18 years old.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Date of Birth</mat-label>
+                             <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="dd/mm/yyyy" id="dob">
+                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                             <mat-datepicker #picker></mat-datepicker>
+                             <mat-error *ngIf="registerForm.get('dob')?.hasError('required') && registerForm.get('dob')?.touched">
+                                 Date of Birth is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                 </div>
+     
+                 <!-- New fields: State, City, Address -->
+                 <div class="row mt-2">
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>State</mat-label>
+                             <input matInput formControlName="state" placeholder="Enter your State" id="state">
+                             <mat-error *ngIf="registerForm.get('state')?.hasError('required') && registerForm.get('state')?.touched">
+                                 State is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>City</mat-label>
+                             <input matInput formControlName="city" placeholder="Enter your City" id="city">
+                             <mat-error *ngIf="registerForm.get('city')?.hasError('required') && registerForm.get('city')?.touched">
+                                 City is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                 </div>
+     
+                 <div class="row mt-2">
+                     <div class="col-md-12 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Address</mat-label>
+                             <input matInput formControlName="address" placeholder="Enter your Address" id="address">
+                             <mat-error *ngIf="registerForm.get('address')?.hasError('required') && registerForm.get('address')?.touched">
+                                 Address is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                 </div>
+     
+                 <!-- New fields: Contact Number, Marital Status, Blood Group -->
+                 <div class="row mt-2">
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Contact Number</mat-label>
+                             <input matInput formControlName="contactNumber" placeholder="Enter your Contact Number" id="contactNumber">
+                             <mat-error *ngIf="registerForm.get('contactNumber')?.hasError('required') && registerForm.get('contactNumber')?.touched">
+                                 Contact Number is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Marital Status</mat-label>
+                             <mat-select formControlName="maritalStatus" id="maritalStatus">
+                                 <mat-option value="Single">Single</mat-option>
+                                 <mat-option value="Married">Married</mat-option>
+                                 <mat-option value="Divorced">Divorced</mat-option>
+                                 <mat-option value="Widowed">Widowed</mat-option>
+                             </mat-select>
+                             <mat-error *ngIf="registerForm.get('maritalStatus')?.hasError('required') && registerForm.get('maritalStatus')?.touched">
+                                 Marital Status is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                 </div>
+     
+                 <div class="row mt-2">
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Blood Group</mat-label>
+                             <mat-select formControlName="bloodGroup" placeholder="Select your Blood Group" id="bloodGroup">
+                                 <mat-option value="A+">A+</mat-option>
+                                 <mat-option value="A-">A-</mat-option>
+                                 <mat-option value="B+">B+</mat-option>
+                                 <mat-option value="B-">B-</mat-option>
+                                 <mat-option value="AB+">AB+</mat-option>
+                                 <mat-option value="AB-">AB-</mat-option>
+                                 <mat-option value="O+">O+</mat-option>
+                                 <mat-option value="O-">O-</mat-option>
+                                 <mat-option value="Rh+">Rh+</mat-option>
+                                 <mat-option value="Rh-">Rh-</mat-option>
+                             </mat-select>
+                             <mat-error *ngIf="registerForm.get('bloodGroup')?.hasError('required') && registerForm.get('bloodGroup')?.touched">
+                                 Blood Group is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                     <div class="col-md-6 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Gender</mat-label>
+                             <mat-select formControlName="gender" id="gender">
+                                 <mat-option value="Male">Male</mat-option>
+                                 <mat-option value="Female">Female</mat-option>
+                                 <mat-option value="Other">Other</mat-option>
+                             </mat-select>
+                             <mat-error *ngIf="registerForm.get('gender')?.hasError('required') && registerForm.get('gender')?.touched">
+                                 Gender is required.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+                 </div>
+     
+                 <!-- Email field -->
+                     <div class="mt-2 form-group">
+                         <mat-form-field appearance="outline" class="w-100">
+                             <mat-label>Email Address</mat-label>
+                             <input matInput formControlName="email" type="email" placeholder="Enter your email" id="email">
+                             <mat-error *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
                                 Email is required.
-                            </mat-error>
-                            <mat-error *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
-                                Invalid email format.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Date of Birth</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="dd/mm/yyyy" id="dob">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                            <mat-error *ngIf="registerForm.get('dob')?.hasError('required') && registerForm.get('dob')?.touched">
-                                Date of Birth is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-
-                <div class="form-group mt-2">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Password</mat-label>
-                        <input matInput type="password" formControlName="password" placeholder="Enter your password" id="password">
-                        <mat-error *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
-                            Password is required.
-                        </mat-error>
-                        <mat-error *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">
-                            Password must be at least 6 characters.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-
-                <div class="form-group mt-2">
-                    <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Confirm Password</mat-label>
-                        <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm your password" id="confirmPassword">
-                        <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched">
-                            Confirm Password is required.
-                        </mat-error>
-                        <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('mismatch') && registerForm.get('confirmPassword')?.touched">
-                            Passwords do not match.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100 mt-2" [disabled]="registerForm.invalid">Sign Up</button>
-
-                <p class="form-text text-center mt-2">
-                    <span class="black-text">Already have an account?</span>
-                    <a [routerLink]="'/login'">Login here</a>
-                </p>
-            </form>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@angular/material@15.0.0/bundles/material.umd.min.js"></script>
-</body>
-
-</html>
+                             </mat-error>
+                             <mat-error *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
+                                 Invalid email format.
+                             </mat-error>
+                         </mat-form-field>
+                     </div>
+ 
+                 <div class="form-group mt-2">
+                     <mat-form-field appearance="outline" class="w-100">
+                         <mat-label>Password</mat-label>
+                         <input matInput type="password" formControlName="password" placeholder="Enter your password" id="password">
+                         <mat-error *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+                             Password is required.
+                         </mat-error>
+                         <mat-error *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">
+                             Password must be at least 6 characters.
+                         </mat-error>
+                     </mat-form-field>
+                 </div>
+ 
+                 <div class="form-group mt-2">
+                     <mat-form-field appearance="outline" class="w-100">
+                         <mat-label>Confirm Password</mat-label>
+                         <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm your password" id="confirmPassword">
+                         <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required') && registerForm.get('confirmPassword')?.touched">
+                             Confirm Password is required.
+                         </mat-error>
+                         <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('mismatch') && registerForm.get('confirmPassword')?.touched">
+                             Passwords do not match.
+                         </mat-error>
+                     </mat-form-field>
+                 </div>
+ 
+                 <button type="submit" class="btn btn-primary w-100 mt-2" [disabled]="registerForm.invalid">Sign Up</button>
+ 
+                 <p class="form-text text-center mt-2">
+                     <span class="black-text">Already have an account?</span>
+                     <a [routerLink]="'/login'">Login here</a>
+                 </p>
+             </form>
+         </div>
+     </div>
+ 
+     <script src="https://cdn.jsdelivr.net/npm/@angular/material@15.0.0/bundles/material.umd.min.js"></script>
+ </body>
+ 
+ </html>
+ 

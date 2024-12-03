@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
   sidebarOpen = true;
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
   }

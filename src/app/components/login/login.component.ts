@@ -76,7 +76,7 @@ export class LoginPageComponent {
           } else if (userRole === 'doctor') {
             this.router.navigate(['/doctor/dashboard']);
           } else {
-            this.router.navigate(['/login']); // Redirect to login if role is unknown
+            this.router.navigate(['/']); // Redirect to login if role is unknown
           }
         }
       });
